@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "FreelancePlatfrom.infrastructure": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:52621;http://localhost:52622"
+    }
+  }
+}
