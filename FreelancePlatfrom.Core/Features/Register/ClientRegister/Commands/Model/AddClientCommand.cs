@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.ClientRegister.Commands.Model
+namespace FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model
 {/// <summary>
  /// Represents a command to register a new client with essential fields.
  /// </summary>

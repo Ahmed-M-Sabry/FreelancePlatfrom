@@ -1,6 +1,6 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Model;
-using FreelancePlatfrom.Core.Features.ClientRegister.Commands.Model;
+using FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

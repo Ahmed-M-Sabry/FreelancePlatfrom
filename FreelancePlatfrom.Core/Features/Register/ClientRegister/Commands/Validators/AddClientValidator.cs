@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
-using FreelancePlatfrom.Core.Features.ClientRegister.Commands.Model;
+using FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.ClientRegister.Commands.Validators
+namespace FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Validators
 {
     /// <summary>
     /// Validator for the AddClientCommand to ensure valid client registration data.

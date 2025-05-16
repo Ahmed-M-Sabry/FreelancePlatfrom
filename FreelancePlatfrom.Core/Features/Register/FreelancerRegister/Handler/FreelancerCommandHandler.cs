@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.FreelancerRegister.Handler
+namespace FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Handler
 {
     public class FreelancerCommandHandler
     {

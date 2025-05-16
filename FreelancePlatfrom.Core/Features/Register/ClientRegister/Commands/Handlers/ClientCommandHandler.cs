@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FreelancePlatfrom.Core.Base;
-using FreelancePlatfrom.Core.Features.ClientRegister.Commands.Model;
+using FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model;
 using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.Data.Shared;
 using FreelancePlatfrom.Service.AbstractionServices;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.ClientRegister.Commands.Handlers
+namespace FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Handlers
 {
     public class ClientCommandHandler : ResponseHandler
         , IRequestHandler<AddClientCommand, ApiResponse<string>>
@@ -60,7 +60,7 @@ namespace FreelancePlatfrom.Core.Features.ClientRegister.Commands.Handlers
                 await _userManager.AddToRoleAsync(newUser, ApplicationRoles.User);
             }
             var Token = await _authenticatioService.CreateJwtToken(newUser);
-            return Created<string>(newUser.Id, new {token = Token , Role = ApplicationRoles.User});
+            return Created(newUser.Id, new {token = Token , Role = ApplicationRoles.User});
         }
     }
 }
