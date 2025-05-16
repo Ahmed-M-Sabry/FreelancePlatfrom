@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Core.Base;
+using FreelancePlatfrom.Data.Entities.Identity.Helper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Model
 {
-    public class SiginInUserCommand : IRequest<ApiResponse<string>>
+    public class SiginInUserCommand : IRequest<ApiResponse<ResponseAuthModel>>
     {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public bool RememberMe { get; set; } = false;
+        public bool RememberMeForMonth { get; set; } = false;
     }
 }

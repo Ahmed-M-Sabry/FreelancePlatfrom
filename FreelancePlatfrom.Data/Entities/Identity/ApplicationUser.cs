@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Data.Entities.FavoritesTables;
+using FreelancePlatfrom.Data.Entities.Identity.Helper;
 using FreelancePlatfrom.Data.Entities.JobPostAndContract;
 using FreelancePlatfrom.Data.Entities.Rating;
 using FreelancePlatfrom.Data.Entities.RegisterNeeded;
@@ -37,7 +38,7 @@ namespace FreelancePlatfrom.Data.Entities.Identity
             ApplyTasksAsFreelancer = new List<ApplyTask>();
             Favorites = new List<FavoritesFreelancer>();
             FavoritesJobPosts = new List<FavJobPost>();
-
+            refreshTokens = new List<RefreshToken>();
         }
 
         public string FirstName
@@ -81,6 +82,8 @@ namespace FreelancePlatfrom.Data.Entities.Identity
         public ICollection<ApplyTask> ApplyTasksAsFreelancer { get; set; }
         public List<FavoritesFreelancer> Favorites { get; set; }
         public List<FavJobPost> FavoritesJobPosts { get; set; }
+        public List<RefreshToken>? refreshTokens { get; set; }
+
 
     }
 }

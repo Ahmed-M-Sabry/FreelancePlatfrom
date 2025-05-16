@@ -25,7 +25,14 @@ namespace FreelancePlatfrom.infrastructure
             services.AddSingleton(jwtSettings);
 
             // 2. Identity
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                option=> {
+                    option.Password.RequiredLength = 6;
+                    option.Password.RequireDigit = false;
+                    option.Password.RequireLowercase = false;
+                    option.Password.RequireUppercase = false;
+                    option.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -46,7 +53,8 @@ namespace FreelancePlatfrom.infrastructure
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtSettings.Issuer,
                     ValidAudience = jwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
+                    ClockSkew = TimeSpan.Zero // Remove delay of token expiration
                 };
             });
 

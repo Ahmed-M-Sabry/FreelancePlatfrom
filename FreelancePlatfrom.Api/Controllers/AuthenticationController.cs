@@ -1,6 +1,9 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Model;
+using FreelancePlatfrom.Core.Features.RefreshTokenFeature.Commnand.Models;
 using FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model;
+using FreelancePlatfrom.Core.Features.Register.LogoutFeature.Command.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,10 +21,38 @@ namespace FreelancePlatfrom.Api.Controllers
 
             return NewResultStatusCode(result);
         }
+
         [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn([FromForm] SiginInUserCommand siginInUserCommand)
         {
             var result = await Mediator.Send(siginInUserCommand);
+            if (result.Succeeded && result.Data?.RefreshToken != null && result.Data.CookieOptions != null)
+            {
+                Response.Cookies.Append("RefreshToken", result.Data.RefreshToken, result.Data.CookieOptions);
+            }
+            return NewResultStatusCode(result);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var result = await Mediator.Send(new LogoutCommand());
+
+            return NewResultStatusCode(result);
+        }
+        [HttpPost("Generate-New-token-From-RefreshToken")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            var result = await Mediator.Send(new RefreshTokenCommand());
+
+            if (!result.Succeeded)
+                return NewResultStatusCode(result);
+
+            if (result.Data?.RefreshToken != null && result.Data.CookieOptions != null)
+            {
+                Response.Cookies.Delete("RefreshToken");
+                Response.Cookies.Append("RefreshToken", result.Data.RefreshToken, result.Data.CookieOptions);
+            }
             return NewResultStatusCode(result);
         }
     }

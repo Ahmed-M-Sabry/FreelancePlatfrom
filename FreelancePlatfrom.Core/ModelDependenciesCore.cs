@@ -16,7 +16,7 @@ namespace FreelancePlatfrom.Core
             services.AddMediatR(c => c.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-
+            services.AddHttpContextAccessor();
 
 
 

@@ -60,7 +60,7 @@ namespace FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Handl
                 await _userManager.AddToRoleAsync(newUser, ApplicationRoles.User);
             }
             var Token = await _authenticatioService.CreateJwtToken(newUser);
-            return Created(newUser.Id, new {token = Token , Role = ApplicationRoles.User});
+            return Created(Token , new { Role = ApplicationRoles.User});
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using FreelancePlatfrom.Core.Features.ClientRegister.Commands.Model;
 using FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model;
 using System;
 using System.Collections.Generic;
