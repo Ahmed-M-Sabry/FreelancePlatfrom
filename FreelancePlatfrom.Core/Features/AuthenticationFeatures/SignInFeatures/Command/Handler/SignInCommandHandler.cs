@@ -1,23 +1,23 @@
-﻿    using FreelancePlatfrom.Core.Base;
-    using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Model;
-    using FreelancePlatfrom.Data.Entities.Identity;
-    using FreelancePlatfrom.Data.Entities.Identity.Helper;
-    using FreelancePlatfrom.Service.AbstractionServices;
-    using MediatR;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
+﻿using FreelancePlatfrom.Core.Base;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.SignInFeatures.Command.Model;
+using FreelancePlatfrom.Data.Entities.Identity;
+using FreelancePlatfrom.Data.Entities.Identity.Helper;
+using FreelancePlatfrom.Service.AbstractionServices;
+using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-    namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Handler
+namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.SignInFeatures.Command.Handler
     {
-        public class AuthenticationCommandHandler : ResponseHandler,
+        public class SignInCommandHandler : ResponseHandler,
                     IRequestHandler<SiginInUserCommand, ApiResponse<ResponseAuthModel>>
         {
             private readonly IAuthenticatioService _authenticatioService;
             private readonly UserManager<ApplicationUser> _userManager;
             private readonly RoleManager<IdentityRole> _roleManager;
 
-            public AuthenticationCommandHandler(IAuthenticatioService authenticatioService,
+            public SignInCommandHandler(IAuthenticatioService authenticatioService,
                 UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
             {
                 _authenticatioService = authenticatioService;

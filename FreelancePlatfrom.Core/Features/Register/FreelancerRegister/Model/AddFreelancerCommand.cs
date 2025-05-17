@@ -1,5 +1,6 @@
 ﻿using FreelancePlatfrom.Core.Base;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model
         private string _password;
         private string _confirmPassword;
         private string _phoneNumber;
-        private string _country;
+        private string _countryId;
         private string _state;
         private string _address;
 
@@ -76,10 +77,10 @@ namespace FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model
 
         public List<int>? SelectedSkills { get; set; }
 
-        public string Country
+        public string CountryId
         {
-            get => _country;
-            set => _country = value ?? throw new ArgumentNullException(nameof(Country));
+            get => _countryId;
+            set => _countryId = value ?? throw new ArgumentNullException(nameof(CountryId));
         }
 
         public string State
@@ -98,6 +99,8 @@ namespace FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model
 
         public string? PortfolioUrl { get; set; }
 
-        public string? ProfilePicture { get; set; }
+        public IFormFile? ProfilePicture { get; set; }
+        public string? ProfilePicturePath { get; set; }
+
     }
 }

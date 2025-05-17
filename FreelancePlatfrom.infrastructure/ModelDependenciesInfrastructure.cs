@@ -22,6 +22,10 @@ namespace FreelancePlatfrom.infrastructure
                 options.UseSqlServer(services.BuildServiceProvider().GetRequiredService<IConfiguration>().GetConnectionString("DefaultConnection")));
 
             services.AddTransient<ICountryRepository, CountryRepository>();
+
+            services.AddTransient<ISkillRepository, SkillRepository>();
+            services.AddTransient<ILanguageRepository, LanguageRepository>();
+
             return services;
         }
     }

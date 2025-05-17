@@ -69,6 +69,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());//Enable Cross Origin Reference Sheraning
+app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();

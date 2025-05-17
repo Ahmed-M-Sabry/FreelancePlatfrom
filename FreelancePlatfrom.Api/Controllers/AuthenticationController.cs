@@ -1,7 +1,8 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
-using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Model;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.SignInFeatures.Command.Model;
 using FreelancePlatfrom.Core.Features.RefreshTokenFeature.Commnand.Models;
 using FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model;
+using FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model;
 using FreelancePlatfrom.Core.Features.Register.LogoutFeature.Command.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +14,16 @@ namespace FreelancePlatfrom.Api.Controllers
     [ApiController]
     public class AuthenticationController : ApplicationControllerBase
     {
+
+        [HttpPost]
+        [Route("Freelancer-Register")]
+        public async Task<IActionResult> RegisterFreelancer([FromForm] AddFreelancerCommand addFreelancerCommand)
+        {
+            var result = await Mediator.Send(addFreelancerCommand);
+
+            return NewResultStatusCode(result);
+        }
+
         [HttpPost]
         [Route("User-Register")]
         public async Task<IActionResult> RegisterUser([FromForm] AddClientCommand addClientCommand)

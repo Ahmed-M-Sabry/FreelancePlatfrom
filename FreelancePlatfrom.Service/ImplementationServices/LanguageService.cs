@@ -1,0 +1,23 @@
+﻿using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
+using FreelancePlatfrom.Service.AbstractionServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FreelancePlatfrom.Service.ImplementationServices
+{
+    public class LanguageService : ILanguageService
+    {
+        private readonly ILanguageRepository _languageRepository;
+        public LanguageService(ILanguageRepository languageRepository)
+        {
+            _languageRepository = languageRepository;
+        }
+        public async Task<List<string>> GetValidLanguageNamesAsync(List<string> languageIds)
+        {
+            return await _languageRepository.GetValidLanguageNamesAsync(languageIds);
+        }
+    }
+}

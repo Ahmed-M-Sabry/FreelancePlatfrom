@@ -19,8 +19,4 @@
 		<ProjectReference Include="..\FreelancePlatfrom.Service\FreelancePlatfrom.Service.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Features\AuthenticationFeatures\Command\Validators\" />
-	</ItemGroup>
-
 </Project>

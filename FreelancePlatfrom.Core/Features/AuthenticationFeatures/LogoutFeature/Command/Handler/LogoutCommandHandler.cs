@@ -1,5 +1,5 @@
 ﻿using FreelancePlatfrom.Core.Base;
-using FreelancePlatfrom.Core.Features.Register.LogoutFeature.Command.Model;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.LogoutFeature.Command.Model;
 using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.Service.AbstractionServices;
 using MediatR;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.Register.LogoutFeature.Command.Handler
+namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.LogoutFeature.Command.Handler
 {
     public class LogoutCommandHandler : ResponseHandler , IRequestHandler<LogoutCommand, ApiResponse<string>>
 

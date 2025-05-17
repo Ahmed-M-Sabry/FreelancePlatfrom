@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Model
+namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.SignInFeatures.Command.Model
 {
     public class SiginInUserCommand : IRequest<ApiResponse<ResponseAuthModel>>
     {

@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Validators
                 .NotEmpty().WithMessage("At least one skill is required.")
                 .When(x => x.SelectedSkills != null);
 
-            RuleFor(x => x.Country)
+            RuleFor(x => x.CountryId)
                 .NotEmpty().WithMessage("Country is required.");
 
             RuleFor(x => x.State)
@@ -86,6 +87,10 @@ namespace FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Validators
             RuleFor(x => x.PortfolioUrl)
                 .Must(BeAValidUrl).WithMessage("Invalid portfolio URL.")
                 .When(x => x.PortfolioUrl != null);
+
+            RuleFor(x => x.ProfilePicture)
+                    .Must(file => file == null || file.Length <= 5 * 1024 * 1024).WithMessage("Profile picture must not exceed 5MB.")
+                    .Must(file => file == null || IsValidImageExtension(file)).WithMessage("Profile picture must be a valid image (jpg, jpeg, png).");
         }
 
         private bool BeAValidUrl(string? url)
@@ -94,6 +99,14 @@ namespace FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Validators
                 return true;
             return Uri.TryCreate(url, UriKind.Absolute, out var uriResult) &&
                    (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+        }
+
+        private bool IsValidImageExtension(IFormFile? file)
+        {
+            if (file == null)
+                return true;
+            var extension = Path.GetExtension(file.FileName).ToLower();
+            return extension == ".jpg" || extension == ".jpeg" || extension == ".png";
         }
     }
 }

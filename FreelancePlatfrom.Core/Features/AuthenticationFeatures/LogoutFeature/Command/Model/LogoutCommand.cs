@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.Register.LogoutFeature.Command.Model
+namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.LogoutFeature.Command.Model
 {
     public class LogoutCommand : IRequest<ApiResponse<string>>
     {
