@@ -12,9 +12,7 @@ namespace FreelancePlatfrom.Service.AbstractionServices
     public interface IAuthenticatioService
     {
         Task<string> CreateJwtToken(ApplicationUser user);
-
         Task<ResponseAuthModel> RefreshTokenAsunc(string token);
-
         Task<ResponseAuthModel> GenerateAuthModelAsync(ApplicationUser user, bool rememberMe);
         Task<bool> RevokeRefreshTokenFromCookiesAsync();
 

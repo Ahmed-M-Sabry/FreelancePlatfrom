@@ -1,5 +1,4 @@
 ﻿using FreelancePlatfrom.Core.Base;
-using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Command.Model;
 using FreelancePlatfrom.Core.Features.RefreshTokenFeature.Commnand.Models;
 using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.Data.Entities.Identity.Helper;

@@ -1,4 +1,7 @@
-﻿using FreelancePlatfrom.infrastructure.Data;
+﻿using FreelancePlatfrom.Data.Entities.RegisterNeeded;
+using FreelancePlatfrom.Data.Entities.SkillAndCategory;
+using FreelancePlatfrom.infrastructure.BaseRepository;
+using FreelancePlatfrom.infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,10 +11,17 @@ using System.Threading.Tasks;
 
 namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 {
-    public interface ISkillRepository
+    public interface ISkillRepository : IGenericRepositoryAsync<UserSkill>
     {
-
         Task<List<int>> GetValidSkillIdsAsync(List<int> skillIds);
+        Task RemoveUserSkillsAsync(string userId);
+        Task AddUserSkillsAsync(string userId, List<int> skillIds);
+        Task<List<int>> GetUserSkillIdsAsync(string userId);
+        Task RemoveUserSkillById(string userId, int Skillid);
+        Task<List<string>> GetUserSkillNamesAsync(string userId);
+        Task<List<Skill>> GetUserSkillsWithNamesAndIdAsync(string userId);
+
+
 
     }
 }
