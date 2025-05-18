@@ -35,6 +35,7 @@ namespace FreelancePlatfrom.Core.Base
                 Message = "Deleted Successfully" ?? Message
             };
         }
+
         public ApiResponse<T> Success<T>(T entity, object Meta = null)
         {
             return new ApiResponse<T>()
@@ -46,6 +47,7 @@ namespace FreelancePlatfrom.Core.Base
                 Meta = Meta
             };
         }
+
         public ApiResponse<T> Unauthorized<T>()
         {
             return new ApiResponse<T>()
@@ -55,6 +57,7 @@ namespace FreelancePlatfrom.Core.Base
                 Message = "UnAuthorized"
             };
         }
+
         public ApiResponse<T> BadRequest<T>(string Message = null)
         {
             return new ApiResponse<T>()
@@ -64,6 +67,7 @@ namespace FreelancePlatfrom.Core.Base
                 Message = Message == null ? "Bad Request" : Message
             };
         }
+
         public ApiResponse<T> UnprocessableEntity<T>(string Message = null)
         {
             return new ApiResponse<T>()
@@ -93,6 +97,16 @@ namespace FreelancePlatfrom.Core.Base
                 Succeeded = true,
                 Message = "Created",
                 Meta = Meta
+            };
+        }
+
+        public ApiResponse<T> NoContent<T>(string message = null)
+        {
+            return new ApiResponse<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.NoContent,
+                Succeeded = false,
+                Message = message == null ? "No Content" : message
             };
         }
     }

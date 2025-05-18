@@ -21,26 +21,29 @@ namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.Register.Freela
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ICountryServices _countryServices;
         private readonly IAuthenticatioService _authenticatioService;
-        private readonly IUserSkillesService _skillService;
+        private readonly IUserSkillesService _userSkillService;
         private readonly IUserLanguagesService _languageService;
         private readonly IFileService _fileService;
+        private readonly ISkillService _skillService;
 
         public FreelancerCommandHandler(
             IMapper mapper,
             UserManager<ApplicationUser> userManager,
             ICountryServices countryServices,
             IAuthenticatioService authenticatioService,
-            IUserSkillesService skillService,
-            IUserLanguagesService languageService
-            ,IFileService fileService)
+            IUserSkillesService UserskillService,
+            IUserLanguagesService languageService,
+            ISkillService skillService,
+            IFileService fileService)
         {
             _mapper = mapper;
             _userManager = userManager;
             _countryServices = countryServices;
             _authenticatioService = authenticatioService;
-            _skillService = skillService;
+            _userSkillService = UserskillService;
             _languageService = languageService;
             _fileService = fileService;
+            _skillService = skillService;
         }
 
         public async Task<ApiResponse<string>> Handle(AddFreelancerCommand request, CancellationToken cancellationToken)

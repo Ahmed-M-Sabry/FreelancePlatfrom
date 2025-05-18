@@ -10,8 +10,8 @@ namespace FreelancePlatfrom.Service.ImplementationServices
 {
     public class UserLanguagesService : IUserLanguagesService
     {
-        private readonly ILanguageRepository _languageRepository;
-        public UserLanguagesService(ILanguageRepository languageRepository)
+        private readonly IUserLanguagesRepository _languageRepository;
+        public UserLanguagesService(IUserLanguagesRepository languageRepository)
         {
             _languageRepository = languageRepository;
         }

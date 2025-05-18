@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 {
-    public interface ILanguageRepository
+    public interface IUserLanguagesRepository
     {
         Task<List<string>> GetValidLanguageNamesAsync(List<string> languageIds);
 

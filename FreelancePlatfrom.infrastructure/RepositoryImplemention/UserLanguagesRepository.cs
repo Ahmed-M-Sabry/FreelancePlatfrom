@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
 {
-    public class LanguageRepository : ILanguageRepository
+    public class UserLanguagesRepository : IUserLanguagesRepository
     {
         private readonly ApplicationDbContext _context;
-        public LanguageRepository(ApplicationDbContext context)
+        public UserLanguagesRepository(ApplicationDbContext context)
         {
             _context = context;
         }

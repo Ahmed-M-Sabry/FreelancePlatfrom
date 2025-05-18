@@ -1,4 +1,5 @@
-﻿using FreelancePlatfrom.Data.Entities.Identity;
+﻿using FreelancePlatform.Infrastructure.RepositoryImplemention;
+using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.infrastructure.BaseRepository;
 using FreelancePlatfrom.infrastructure.Data;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
@@ -22,9 +23,12 @@ namespace FreelancePlatfrom.infrastructure
                 options.UseSqlServer(services.BuildServiceProvider().GetRequiredService<IConfiguration>().GetConnectionString("DefaultConnection")));
 
             services.AddTransient<ICountryRepository, CountryRepository>();
-
-            services.AddTransient<ISkillRepository, SkillRepository>();
-            services.AddTransient<ILanguageRepository, LanguageRepository>();
+            services.AddTransient<IUserSkillsRepository, UserSkillsRepository>();
+            services.AddTransient<IUserLanguagesRepository, UserLanguagesRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IjobPostRepository, jobPostRepository>();
+            services.AddTransient<IJobPostSkillServicesRepository, JobPostSkillServicesRepository>();
+            services.AddTransient<ISkillRepostitory, SkillRepostitory>();
 
             return services;
         }

@@ -12,22 +12,16 @@ using System.Threading.Tasks;
 
 namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
 {
-    public class SkillRepository :GenericRepositoryAsync<UserSkill> ,ISkillRepository
+    public class UserSkillsRepository :GenericRepositoryAsync<UserSkill> ,IUserSkillsRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public SkillRepository(ApplicationDbContext context) : base(context)
+        public UserSkillsRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<List<int>> GetValidSkillIdsAsync(List<int> skillIds)
-        {
-            return await _context.Skills
-                .Where(s => skillIds.Contains(s.Id))
-                .Select(s => s.Id)
-                .ToListAsync();
-        }
+
         public async Task RemoveUserSkillsAsync(string userId)
         {
             var userSkills = await _context.UserSkills

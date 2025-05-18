@@ -15,15 +15,17 @@ namespace FreelancePlatfrom.Core.Features.UserSkillFreature.Command.Handler
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IUserSkillesService _skillService;
-
+        private readonly IUserSkillesService _userSkillService;
+        private readonly ISkillService _skillService;
         public ChangeUserSkillsHandler(
             UserManager<ApplicationUser> userManager,
             IHttpContextAccessor httpContextAccessor,
-            IUserSkillesService skillService)
+            IUserSkillesService userSkillService,
+            ISkillService skillService)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
+            _userSkillService = userSkillService;
             _skillService = skillService;
         }
 
@@ -44,7 +46,6 @@ namespace FreelancePlatfrom.Core.Features.UserSkillFreature.Command.Handler
                 if (validSkillIds == null || validSkillIds.Count != request.SelectedSkills.Count)
                     return BadRequest<string>("Invalid SkillId(s)");
             }
-
             try
             {
 
@@ -54,13 +55,13 @@ namespace FreelancePlatfrom.Core.Features.UserSkillFreature.Command.Handler
                     if (validSkillIds == null || validSkillIds.Count != request.SelectedSkills.Count)
                         return BadRequest<string>("Invalid SkillId(s)");
 
-                    var existingSkillIds = await _skillService.GetUserSkillIdsAsync(userId);
+                    var existingSkillIds = await _userSkillService.GetUserSkillIdsAsync(userId);
                     var newSkillsToAdd = request.SelectedSkills.Except(existingSkillIds).ToList();
 
                     if (!newSkillsToAdd.Any())
                         return BadRequest<string>("All selected skills are already added.");
 
-                    await _skillService.AddUserSkillsAsync(userId, request.SelectedSkills);
+                    await _userSkillService.AddUserSkillsAsync(userId, request.SelectedSkills);
                 }
 
                 return Success("Skills updated successfully.");

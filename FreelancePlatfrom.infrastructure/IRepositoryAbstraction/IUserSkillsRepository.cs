@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 
 namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 {
-    public interface ISkillRepository : IGenericRepositoryAsync<UserSkill>
+    public interface IUserSkillsRepository : IGenericRepositoryAsync<UserSkill>
     {
-        Task<List<int>> GetValidSkillIdsAsync(List<int> skillIds);
         Task RemoveUserSkillsAsync(string userId);
         Task AddUserSkillsAsync(string userId, List<int> skillIds);
         Task<List<int>> GetUserSkillIdsAsync(string userId);

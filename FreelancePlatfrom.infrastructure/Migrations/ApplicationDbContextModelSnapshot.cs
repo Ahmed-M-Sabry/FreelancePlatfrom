@@ -43,7 +43,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("JobPostId");
 
-                    b.ToTable("FavoriteJobPost");
+                    b.ToTable("FavoriteJobPost", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.FavoritesTables.FavoritesFreelancer", b =>
@@ -66,7 +66,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("Favorites", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.Identity.ApplicationUser", b =>
@@ -238,7 +238,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("JobPostId");
 
-                    b.ToTable("ApplyTasks");
+                    b.ToTable("ApplyTasks", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.JobPostAndContract.Contracts", b =>
@@ -287,7 +287,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("JobPostId");
 
-                    b.ToTable("Contracts");
+                    b.ToTable("Contracts", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.JobPostAndContract.JobPost", b =>
@@ -332,7 +332,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("JobPosts");
+                    b.ToTable("JobPosts", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.JobPostAndContract.JobPostSkill", b =>
@@ -347,7 +347,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("JobPostId");
 
-                    b.ToTable("JobPostSkill");
+                    b.ToTable("JobPostSkill", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.Portfolio", b =>
@@ -383,7 +383,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Portfolio");
+                    b.ToTable("Portfolio", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.Rating.Review", b =>
@@ -428,7 +428,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("FreelancerId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.RegisterNeeded.ApplicationUserLanguage", b =>
@@ -443,7 +443,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("ApplicationUserLanguages");
+                    b.ToTable("ApplicationUserLanguages", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.RegisterNeeded.Country", b =>
@@ -478,7 +478,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("countries");
+                    b.ToTable("countries", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.RegisterNeeded.Language", b =>
@@ -495,7 +495,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Languages", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.RegisterNeeded.UserSkill", b =>
@@ -510,7 +510,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("UserSkills");
+                    b.ToTable("UserSkills", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.Report.Reports", b =>
@@ -549,7 +549,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("FreelancerId");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Reports", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.SkillAndCategory.Category", b =>
@@ -569,7 +569,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.SkillAndCategory.Skill", b =>
@@ -589,7 +589,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skills", (string)null);
                 });
 
             modelBuilder.Entity("FreelancePlatfrom.Data.Entities.SkillAndCategory.SkillCategory", b =>
@@ -604,7 +604,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("SkillCategory");
+                    b.ToTable("SkillCategory", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -777,7 +777,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.OwnsMany("FreelancePlatfrom.Data.Entities.Identity.Helper.RefreshToken", "refreshTokens", b1 =>
+                    b.OwnsMany("FreelancePlatfrom.Data.Entities.Identity.ApplicationUser.refreshTokens#FreelancePlatfrom.Data.Entities.Identity.Helper.RefreshToken", "refreshTokens", b1 =>
                         {
                             b1.Property<string>("ApplicationUserId")
                                 .HasColumnType("nvarchar(450)");
@@ -803,7 +803,7 @@ namespace FreelancePlatfrom.infrastructure.Migrations
 
                             b1.HasKey("ApplicationUserId", "Id");
 
-                            b1.ToTable("RefreshToken");
+                            b1.ToTable("RefreshToken", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ApplicationUserId");

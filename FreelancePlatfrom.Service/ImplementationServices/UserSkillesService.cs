@@ -13,8 +13,8 @@ namespace FreelancePlatfrom.Service.ImplementationServices
 {
     public class UserSkillesService : IUserSkillesService
     {
-        private readonly ISkillRepository _skillRepository;
-        public UserSkillesService(ISkillRepository skillRepository)
+        private readonly IUserSkillsRepository _skillRepository;
+        public UserSkillesService(IUserSkillsRepository skillRepository)
         {
             _skillRepository = skillRepository;
         }
@@ -23,11 +23,6 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         public async Task AddUserSkillsAsync(string userId, List<int> skillIds)
         {
             await _skillRepository.AddUserSkillsAsync(userId, skillIds);
-        }
-
-        public async Task<List<int>> GetValidSkillIdsAsync(List<int> skillIds)
-        {
-            return await _skillRepository.GetValidSkillIdsAsync(skillIds);
         }
 
         public Task RemoveUserSkillsAsync(string userId)

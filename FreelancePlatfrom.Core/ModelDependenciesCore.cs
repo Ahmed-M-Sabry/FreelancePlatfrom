@@ -1,6 +1,9 @@
 ﻿using FluentValidation;
 using FreelancePlatform.Core.Features.AuthenticationFeatures.ChangePasswordFeature.Validators;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.ChangePasswordFreature.Command.Model;
+using FreelancePlatfrom.Core.Features.JobPostFeatures.Command.Models;
+using FreelancePlatfrom.Core.Features.jobPostFeatrures.Command.Models;
+using FreelancePlatfrom.Core.Features.jobPostFeatrures.Command.Validator;
 using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +23,8 @@ namespace FreelancePlatfrom.Core
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IValidator<ChangePasswordCommand>, ChangePasswordValidator>();
-
+            services.AddScoped<IValidator<CreateJobPostCommand>, CreateJobPostValidator>();
+            services.AddScoped<IValidator<EditJobPostCommand>, EditJobPostValidator>();
             services.AddHttpContextAccessor();
 
 

@@ -217,6 +217,7 @@ namespace FreelancePlatfrom.infrastructure.Data
         public DbSet<FavJobPost> FavoriteJobPost { get; set; }
         public DbSet<UserSkill> UserSkills { get; set; }
         public DbSet<Country> countries { get; set; }
+        public DbSet<JobPostSkill> JobPostSkill { get; set; }
 
     }
 }
