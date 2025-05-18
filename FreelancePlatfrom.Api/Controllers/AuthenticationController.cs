@@ -1,9 +1,9 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.LogoutFeature.Command.Model;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.RefreshTokenFeature.Commnand.Models;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Register.ClientRegister.Commands.Model;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Register.FreelancerRegister.Model;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.SignInFeatures.Command.Model;
-using FreelancePlatfrom.Core.Features.RefreshTokenFeature.Commnand.Models;
-using FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model;
-using FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

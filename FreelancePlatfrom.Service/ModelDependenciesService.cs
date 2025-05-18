@@ -15,8 +15,8 @@ namespace FreelancePlatfrom.Service
             services.AddTransient<ICountryServices, CountryServices>();
             services.AddTransient<IAuthenticatioService, AuthenticatioService>();
 
-            services.AddTransient<ISkillService, SkillService>();
-            services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<IUserSkillesService, UserSkillesService>();
+            services.AddTransient<IUserLanguagesService, UserLanguagesService>();
 
             services.AddTransient<IFileService, FileService>();
 

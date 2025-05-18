@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using FreelancePlatfrom.Core.Features.Register.ClientRegister.Commands.Model;
-using FreelancePlatfrom.Core.Features.Register.FreelancerRegister.Model;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Register.ClientRegister.Commands.Model;
 using FreelancePlatfrom.Data.Entities.Identity;
 using System;
 using System.Collections.Generic;
