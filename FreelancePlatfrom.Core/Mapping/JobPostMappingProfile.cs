@@ -49,6 +49,7 @@ namespace FreelancePlatfrom.Core.Mapping
 
             CreateMap<JobPost, GetJobPostByIdDto>()
                 .ForMember(dest => dest.SkillIds, opt => opt.MapFrom(src => src.JobPostSkills.Select(s => s.SkillId)))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ApplicationUser.FirstName + " " + src.ApplicationUser.LastName))
                 .ForMember(dest => dest.SkillNames, opt => opt.MapFrom(src => src.JobPostSkills.Select(s => s.Skill.Name)))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
 

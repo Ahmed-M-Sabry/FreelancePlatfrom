@@ -10,6 +10,7 @@ namespace FreelancePlatfrom.Core.Features.jobPostFeatrures.Queries.Result
     {
         public int Id { get; set; }
         public string UserId { get; set; }
+        public string Name { get; set; }
 
         private string _title;
         private string _description;

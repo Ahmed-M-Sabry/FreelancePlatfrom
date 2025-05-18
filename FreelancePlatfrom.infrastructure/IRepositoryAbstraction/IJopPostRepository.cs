@@ -18,5 +18,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 
         Task<List<JobPost>> GetAllJobPostsAsync();
 
+        Task<JobPost> GetByIdAsync(int id);
+
     }
 }

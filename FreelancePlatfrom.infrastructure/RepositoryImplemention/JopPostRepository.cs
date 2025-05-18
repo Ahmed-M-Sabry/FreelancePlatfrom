@@ -60,6 +60,15 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
                 .ThenInclude(js => js.Skill)
                 .ToListAsync();
         }
+        public async Task<JobPost> GetByIdAsync(int id)
+        {
+            return await _context.JobPosts
+                .Include(j => j.ApplicationUser)
+                .Include(j => j.Category)
+                .Include(j => j.JobPostSkills)
+                    .ThenInclude(js => js.Skill)
+                .FirstOrDefaultAsync(j => j.Id == id && !j.IsDeleted);
+        }
     }
 
 }
