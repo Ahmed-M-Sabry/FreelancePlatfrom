@@ -32,6 +32,11 @@ namespace FreelancePlatfrom.Service.ImplementationServices
            return await _jobPostRepository.GetAllJobPostsAsync();
         }
 
+        public async Task<JobPost> GetByIdAndNotDeletedAsync(int id)
+        {
+            return await _jobPostRepository.GetByIdAndNotDeletedAsync(id);
+        }
+
         public async Task<JobPost> GetByIdAsync(int id)
         {
             return await _jobPostRepository.GetByIdAsync(id);

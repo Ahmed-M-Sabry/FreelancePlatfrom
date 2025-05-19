@@ -14,6 +14,7 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
     public class jobPostRepository : GenericRepositoryAsync<JobPost>, IjobPostRepository
     {
         private readonly ApplicationDbContext _context;
+
         public jobPostRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
@@ -22,10 +23,8 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         public async Task<JobPost> DeleteJobPost(string UserId, int id)
         {
             var oldData = await _context.JobPosts
-                            .Include(j => j.Category)
-                            .Include(j => j.JobPostSkills)
-                                .ThenInclude(js => js.Skill)
                             .FirstOrDefaultAsync(j => j.UserId == UserId && j.Id == id && !j.IsDeleted);
+
             oldData.IsDeleted = true;
             _context.JobPosts.Update(oldData);
             await _context.SaveChangesAsync();
@@ -67,6 +66,12 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
                 .Include(j => j.Category)
                 .Include(j => j.JobPostSkills)
                     .ThenInclude(js => js.Skill)
+                .FirstOrDefaultAsync(j => j.Id == id && !j.IsDeleted);
+        }
+
+        public async Task<JobPost> GetByIdAndNotDeletedAsync(int id)
+        {
+            return await _context.JobPosts
                 .FirstOrDefaultAsync(j => j.Id == id && !j.IsDeleted);
         }
     }

@@ -17,5 +17,8 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<JobPost> GetJobPostByIdAsync(string UserId, int id);
 
         Task<JobPost> DeleteJobPost(string UserId, int id);
+
+        Task<JobPost> GetByIdAndNotDeletedAsync(int id);
+
     }
 }

@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
 using FreelancePlatform.Core.Features.AuthenticationFeatures.ChangePasswordFeature.Validators;
+using FreelancePlatfrom.Core.Features.ApplyTaskFeatrures.Command.Models;
+using FreelancePlatfrom.Core.Features.ApplyTaskFeatrures.Command.Validator;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.ChangePasswordFreature.Command.Model;
-using FreelancePlatfrom.Core.Features.JobPostFeatures.Command.Models;
 using FreelancePlatfrom.Core.Features.jobPostFeatrures.Command.Models;
 using FreelancePlatfrom.Core.Features.jobPostFeatrures.Command.Validator;
+using FreelancePlatfrom.Core.Features.JobPostFeatures.Command.Models;
 using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +27,9 @@ namespace FreelancePlatfrom.Core
             services.AddScoped<IValidator<ChangePasswordCommand>, ChangePasswordValidator>();
             services.AddScoped<IValidator<CreateJobPostCommand>, CreateJobPostValidator>();
             services.AddScoped<IValidator<EditJobPostCommand>, EditJobPostValidator>();
+            services.AddScoped<IValidator<CreateApplyTaskCommand>, CreateApplyTaskValidator>();
+            services.AddScoped<IValidator<EditApplyTaskCommand>, EditApplyTaskValidator>();
+
             services.AddHttpContextAccessor();
 
 

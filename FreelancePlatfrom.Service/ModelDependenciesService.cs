@@ -23,6 +23,7 @@ namespace FreelancePlatfrom.Service
             services.AddTransient<IJobPostSkillServices, JobPostSkillServices>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<ISkillService, SkillService>();
+            services.AddTransient<IApplyTaskService, ApplyTaskService>();
             return services;
         }
     }

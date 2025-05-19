@@ -1,0 +1,60 @@
+﻿using FreelancePlatfrom.Data.Entities.JobPostAndContract;
+using FreelancePlatfrom.infrastructure.BaseRepository;
+using FreelancePlatfrom.infrastructure.Data;
+using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
+{
+    public class ApplyTaskRepository : GenericRepositoryAsync<ApplyTask> , IApplyTaskRepository
+    {
+        private readonly ApplicationDbContext _context;
+
+        public ApplyTaskRepository(ApplicationDbContext context) : base(context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<ApplyTask>> GetAllApplyTask(string userId)
+        {
+            return await _context.ApplyTasks
+                .Where(a => a.FreelancerId == userId || a.ClientId == userId && !a.IsDeleted)
+                .Include(a => a.JobPost)
+                .Include(a=>a.Freelancer)
+                .ToListAsync();
+        }
+
+        //public Task DeleteApplyTask(ApplyTask applyTask)
+        //{
+        //    applyTask.IsDeleted = true;
+        //    _context.Update(applyTask);
+        //    return _context.SaveChangesAsync();
+        //}
+
+        public async Task<ApplyTask> GetApplyTask(string userId, int id)
+        {
+            return await _context.ApplyTasks
+                 .FirstOrDefaultAsync(a => a.FreelancerId == userId && a.Id == id && !a.IsDeleted);
+        }
+
+        public async Task<ApplyTask> GetApplyTaskById(string userId, int id)
+        {
+            return await _context.ApplyTasks
+                .Include(a => a.JobPost)
+                .Include(a => a.Freelancer)
+                .FirstOrDefaultAsync(a=>a.FreelancerId == userId  || a.ClientId == userId && a.Id == id && !a.IsDeleted);
+        }
+
+        public async Task<ApplyTask> GetByJobPostIdAndFreelancerIdAsync(int jobPostId, string userId)
+        {
+            return await _context.ApplyTasks
+                .FirstOrDefaultAsync(a => a.JobPostId == jobPostId && a.FreelancerId == userId && !a.IsDeleted);
+        }
+    }
+}
