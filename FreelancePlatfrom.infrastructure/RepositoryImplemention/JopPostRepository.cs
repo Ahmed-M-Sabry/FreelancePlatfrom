@@ -30,7 +30,11 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
             await _context.SaveChangesAsync();
             return oldData;
         }
-
+        public async Task<string> DeleteAsync(JobPost jobPost)
+        {
+            _context.JobPosts.Remove(jobPost);
+            return await _context.SaveChangesAsync() > 0 ? "Job Post Deleted Successfully" : "Failed to Delete Job Post";
+        }
         public async Task<List<JobPost>> GetAllJobPostsAsync()
         {
             return await _context.JobPosts.Where(j => !j.IsDeleted)

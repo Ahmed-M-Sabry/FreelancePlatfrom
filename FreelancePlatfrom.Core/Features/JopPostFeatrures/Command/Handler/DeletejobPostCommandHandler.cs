@@ -45,9 +45,15 @@ namespace FreelancePlatfrom.Core.Features.JopPostFeatrures.Command.Handler
             if (user == null)
                 return BadRequest<string>("User not found.");
 
-            var jobPost = await _jobPostService.DeleteJobPost(userId ,request.Id);
+            // Verify if job post exists
+            var jobPost = await _jobPostService.GetJobPostByIdAsync(userId ,request.Id);
             if (jobPost == null)
                 return NotFound<string>("Job post not found to Delete.");
+
+
+            var DeletedJobPost = await _jobPostService.DeleteAsync(jobPost);
+            if (DeletedJobPost == null)
+                return BadRequest<string>("Can't Delete Job Post.");
 
             return Deleted<string>("Job post deleted successfully.");
         }

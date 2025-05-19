@@ -16,5 +16,6 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<string> DeleteApplyTask(ApplyTask applyTask);
         Task<List<ApplyTask>> GetAllApplyTask(string userId);
         Task<ApplyTask> GetApplyTaskById(string userId, int id);
+
     }
 }

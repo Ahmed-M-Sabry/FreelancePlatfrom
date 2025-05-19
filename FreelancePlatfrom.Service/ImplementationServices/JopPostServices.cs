@@ -22,6 +22,12 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             return _jobPostRepository.AddAsync(jobPost);
         }
 
+        public async Task<string> DeleteAsync(JobPost jobPost)
+        {
+            await _jobPostRepository.DeleteAsync(jobPost);
+            return "Job Post Deleted Successfully";
+        }
+
         public async Task<JobPost> DeleteJobPost(string UserId, int id)
         {
             return await _jobPostRepository.DeleteJobPost(UserId, id);

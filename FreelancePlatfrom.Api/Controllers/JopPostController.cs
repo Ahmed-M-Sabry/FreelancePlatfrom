@@ -43,7 +43,6 @@ namespace FreelancePlatfrom.Api.Controllers
             var result = await Mediator.Send(command);
             return NewResultStatusCode(result);
         }
-
         [HttpPut("Update-Job-Post")]
         public async Task<IActionResult> UpdateJobPost([FromForm] EditJobPostDto dto)
         {
@@ -53,7 +52,7 @@ namespace FreelancePlatfrom.Api.Controllers
 
         }
 
-        [HttpPut("Delete-My-Job-Post-By-Id/{id}")]
+        [HttpDelete("Delete-My-Job-Post-By-Id/{id}")]
         public async Task<IActionResult> DeletejobPost(int id)
         {
             var result = await Mediator.Send(new DeletejobPostCommand (id));
