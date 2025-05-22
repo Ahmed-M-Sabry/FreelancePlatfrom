@@ -15,6 +15,11 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
         Task<List<ApplyTask>> GetAllApplyTask(string userId);
         //Task DeleteApplyTask(ApplyTask applyTask);
         Task<ApplyTask> GetApplyTaskById(string userId, int id);
+        Task<ApplyTask> AcceptApplyTask(string userId, int id);
+        Task<ApplyTask> RejectApplyTask(string userId, int id);
+        Task<List<ApplyTask>> GetAcceptedApplyTaskForFreelancer(string userId);
+        Task<List<ApplyTask>> GetRejectedApplyTaskForFreelancer(string userId);
+        Task<List<ApplyTask>> GetPendingApplyTaskForFreelancer(string userId);
     }
 
 }

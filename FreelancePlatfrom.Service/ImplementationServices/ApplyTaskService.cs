@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Data.Entities.JobPostAndContract;
+using FreelancePlatfrom.Data.Shared;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
 using FreelancePlatfrom.Service.AbstractionServices;
 using System;
@@ -17,6 +18,15 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             _applyTaskRepository = applyTaskRepository;
         }
 
+        public async Task<ApplyTask> AcceptApplyTask(string userId, int id)
+        {
+            return await _applyTaskRepository.AcceptApplyTask(userId, id);
+            
+        }
+        public async Task<ApplyTask> RejectApplyTask(string userId, int id)
+        {
+            return await _applyTaskRepository.RejectApplyTask(userId, id);
+        }
         public async Task<string> AddAsync(ApplyTask applyTask)
         {
             await _applyTaskRepository.AddAsync(applyTask);
@@ -50,10 +60,44 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             return await _applyTaskRepository.GetByJobPostIdAndFreelancerIdAsync(jobPostId, userId);
         }
 
+
         public async Task<string> UpdateAsync(ApplyTask applyTask)
         {
             await _applyTaskRepository.UpdateAsync(applyTask);
             return "Apply Task Updated Successfully";
+        }
+
+        public async Task<bool> isApplyTaskAccepted(string userId, int id)
+        {
+            var applyTask = await _applyTaskRepository.GetApplyTask(userId, id);
+            if (applyTask == null)
+                return false;
+            if(applyTask.Status == ApplyTaskStatus.Accepted)
+                return true;
+            return false;
+        }
+        public async Task<bool> isApplyTaskRejected(string userId, int id)
+        {
+            var applyTask = await _applyTaskRepository.GetApplyTask(userId, id);
+            if (applyTask == null)
+                return false;
+            if (applyTask.Status == ApplyTaskStatus.Rejected)
+                return true;
+            return false;
+        }
+
+        public async Task<List<ApplyTask>> GetAcceptedApplyTaskForFreelancer(string userId)
+        {
+            return await _applyTaskRepository.GetAcceptedApplyTaskForFreelancer(userId);
+        }
+
+        public async Task<List<ApplyTask>> GetRejectedApplyTaskForFreelancer(string userId)
+        {
+            return await _applyTaskRepository.GetRejectedApplyTaskForFreelancer(userId);
+        }
+        public async Task<List<ApplyTask>> GetPendingApplyTaskForFreelancer(string userId)
+        {
+            return await _applyTaskRepository.GetPendingApplyTaskForFreelancer(userId);
         }
     }
 }

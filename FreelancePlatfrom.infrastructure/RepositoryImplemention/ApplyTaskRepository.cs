@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Data.Entities.JobPostAndContract;
+using FreelancePlatfrom.Data.Shared;
 using FreelancePlatfrom.infrastructure.BaseRepository;
 using FreelancePlatfrom.infrastructure.Data;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
@@ -20,7 +21,6 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         {
             _context = context;
         }
-
         public async Task<List<ApplyTask>> GetAllApplyTask(string userId)
         {
             return await _context.ApplyTasks
@@ -40,7 +40,7 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         public async Task<ApplyTask> GetApplyTask(string userId, int id)
         {
             return await _context.ApplyTasks
-                 .FirstOrDefaultAsync(a => a.FreelancerId == userId && a.Id == id && !a.IsDeleted);
+                 .FirstOrDefaultAsync(a => a.FreelancerId == userId || a.ClientId == userId && a.Id == id && !a.IsDeleted);
         }
 
         public async Task<ApplyTask> GetApplyTaskById(string userId, int id)
@@ -55,6 +55,53 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         {
             return await _context.ApplyTasks
                 .FirstOrDefaultAsync(a => a.JobPostId == jobPostId && a.FreelancerId == userId && !a.IsDeleted);
+        }
+
+
+        public async Task<ApplyTask> RejectApplyTask(string userId, int id)
+        {
+            var oldData =  await _context.ApplyTasks
+                                .FirstOrDefaultAsync(a => a.ClientId == userId && a.Id == id && !a.IsDeleted);
+            oldData.Status = ApplyTaskStatus.Rejected;
+            await _context.SaveChangesAsync();
+            return oldData;
+        }
+
+        public async Task<ApplyTask> AcceptApplyTask(string userId, int id)
+        {
+            var oldData = await _context.ApplyTasks
+                                .FirstOrDefaultAsync(a => a.ClientId == userId && a.Id == id && !a.IsDeleted);
+            oldData.Status = ApplyTaskStatus.Accepted;
+            await _context.SaveChangesAsync();
+            return oldData;
+
+        }
+
+        public async Task<List<ApplyTask>> GetAcceptedApplyTaskForFreelancer(string userId)
+        {
+            return await _context.ApplyTasks
+                .Where(a => a.FreelancerId == userId && a.Status == ApplyTaskStatus.Accepted && !a.IsDeleted)
+                .Include(a => a.JobPost)
+                .Include(a => a.Client)
+                .ToListAsync();
+        }
+
+        public async Task<List<ApplyTask>> GetRejectedApplyTaskForFreelancer(string userId)
+        {
+            return await _context.ApplyTasks
+                .Where(a => a.FreelancerId == userId && a.Status == ApplyTaskStatus.Rejected && !a.IsDeleted)
+                .Include(a => a.JobPost)
+                .Include(a => a.Client)
+                .ToListAsync();
+        }
+
+        public async Task<List<ApplyTask>> GetPendingApplyTaskForFreelancer(string userId)
+        {
+            return await _context.ApplyTasks
+                .Where(a => a.FreelancerId == userId && a.Status == ApplyTaskStatus.Pending && !a.IsDeleted)
+                .Include(a => a.JobPost)
+                .Include(a => a.Client)
+                .ToListAsync();
         }
     }
 }

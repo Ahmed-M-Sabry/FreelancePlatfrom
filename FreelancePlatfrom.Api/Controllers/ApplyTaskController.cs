@@ -40,6 +40,27 @@ namespace FreelancePlatfrom.Api.Controllers
             var result = await Mediator.Send(new GetApplyTaskByIdQuery(id));
             return NewResultStatusCode(result);
         }
+        [HttpGet("Get-Accepted-My-ApplyTask")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
+        public async Task<IActionResult> GetAcceptedMyApplyTask()
+        {
+            var result = await Mediator.Send(new GetAcceptedMyApplyTaskQuery());
+            return NewResultStatusCode(result);
+        }
+        [HttpGet("Get-Rejected-My-ApplyTask")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
+        public async Task<IActionResult> GetRejectedMyApplyTask()
+        {
+            var result = await Mediator.Send(new GetRejectedMyApplyTaskQuery());
+            return NewResultStatusCode(result);
+        }
+        [HttpGet("Get-Pending-My-ApplyTask")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
+        public async Task<IActionResult> GetPendingMyApplyTask()
+        {
+            var result = await Mediator.Send(new GetPendingMyApplyTaskQuery());
+            return NewResultStatusCode(result);
+        }
         [HttpPost("Apply-In-New-JobPost")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
         public async Task<IActionResult> ApplyInNewJobPost([FromForm] CreateApplyTaskDto createApplyTaskDto)
@@ -48,7 +69,20 @@ namespace FreelancePlatfrom.Api.Controllers
             var result = await Mediator.Send(command);
             return NewResultStatusCode(result);
         }
-
+        [HttpPut("Accept-ApplyTask")]
+        [Authorize(Roles = ApplicationRoles.User)]
+        public async Task<IActionResult> AcceptApplyTask([FromForm] int id)
+        {
+            var result = await Mediator.Send(new AcceptApplyTaskCommand(id));
+            return NewResultStatusCode(result);
+        }
+        [HttpPut("Reject-ApplyTask")]
+        [Authorize(Roles = ApplicationRoles.User)]
+        public async Task<IActionResult> RejectApplyTask([FromForm] int id)
+        {
+            var result = await Mediator.Send(new RejectApplyTaskCommand(id));
+            return NewResultStatusCode(result);
+        }
         [HttpPut("Update-ApplyTask")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
         public async Task<IActionResult> UpdateApplyTask([FromForm] EditApplyTaskDto editApplyTaskDto)

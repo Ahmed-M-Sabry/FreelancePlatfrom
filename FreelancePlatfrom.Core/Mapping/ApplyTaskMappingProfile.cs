@@ -92,6 +92,33 @@ namespace FreelancePlatfrom.Core.Mapping
                 .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostDescription, opt => opt.MapFrom(src => src.JobPost.Description))
                 .ForMember(GetApplyTaskByIdDto => GetApplyTaskByIdDto.ClientId, opt => opt.MapFrom(src => src.ClientId))
                 .ForMember(GetApplyTaskByIdDto => GetApplyTaskByIdDto.ClientName, opt => opt.MapFrom(src => src.Client.FirstName + " " + src.Client.LastName));
-        }
+
+            CreateMap<ApplyTask, GetAcceptedMyApplyTaskDto>()
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.Status, opt => opt.MapFrom(src => src.Status))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.ClientId, opt => opt.MapFrom(src => src.ClientId))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.ClientName, opt => opt.MapFrom(src => src.Client.FirstName + " " + src.Client.LastName))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostId, opt => opt.MapFrom(src => src.JobPostId))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostName, opt => opt.MapFrom(src => src.JobPost.Title))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostDescription, opt => opt.MapFrom(src => src.JobPost.Description));
+
+            CreateMap<ApplyTask, GetRejectedMyApplyTaskDto>()
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.Status, opt => opt.MapFrom(src => src.Status))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.ClientId, opt => opt.MapFrom(src => src.ClientId))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.ClientName, opt => opt.MapFrom(src => src.Client.FirstName + " " + src.Client.LastName))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostId, opt => opt.MapFrom(src => src.JobPostId))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostName, opt => opt.MapFrom(src => src.JobPost.Title))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostDescription, opt => opt.MapFrom(src => src.JobPost.Description));
+            CreateMap<ApplyTask, GetPendingMyApplyTaskDto>()
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.Status, opt => opt.MapFrom(src => src.Status))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.ClientId, opt => opt.MapFrom(src => src.ClientId))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.ClientName, opt => opt.MapFrom(src => src.Client.FirstName + " " + src.Client.LastName))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostId, opt => opt.MapFrom(src => src.JobPostId))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostName, opt => opt.MapFrom(src => src.JobPost.Title))
+                .ForMember(GetMyApplyTaskDto => GetMyApplyTaskDto.JobPostDescription, opt => opt.MapFrom(src => src.JobPost.Description));
+        
+    }
     }
 }
