@@ -30,6 +30,7 @@ namespace FreelancePlatfrom.infrastructure
             services.AddTransient<IJobPostSkillServicesRepository, JobPostSkillServicesRepository>();
             services.AddTransient<ISkillRepostitory, SkillRepostitory>();
             services.AddTransient<IApplyTaskRepository, ApplyTaskRepository>();
+            services.AddTransient<IFavoritesFreelancerRepository, FavoritesFreelancerRepository>();
 
             return services;
         }

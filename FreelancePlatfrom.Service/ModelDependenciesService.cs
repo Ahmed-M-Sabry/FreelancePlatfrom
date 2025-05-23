@@ -24,6 +24,7 @@ namespace FreelancePlatfrom.Service
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<ISkillService, SkillService>();
             services.AddTransient<IApplyTaskService, ApplyTaskService>();
+            services.AddTransient<IFavoritesFreelancerServices, FavoritesFreelancerServices>();
             return services;
         }
     }
