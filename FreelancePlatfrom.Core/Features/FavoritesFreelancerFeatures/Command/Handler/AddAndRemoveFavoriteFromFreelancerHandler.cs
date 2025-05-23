@@ -67,7 +67,7 @@ namespace FreelancePlatfrom.Core.Features.FavoritesFreelancerFeatures.Command.Ha
             };
 
             await _favoritesFreelancerServices.AddFavoriteToFreelancer(favoritesFreelancer);
-            return Success<string>(request.UserId, new { Message = "Freelancer added to favorites." });
+            return Created<string>(request.UserId, new { Message = "Freelancer added to favorites." });
         }
     }
 }

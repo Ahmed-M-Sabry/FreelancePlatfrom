@@ -51,7 +51,6 @@ namespace FreelancePlatfrom.Api.Controllers
             return NewResultStatusCode(result);
 
         }
-
         [HttpDelete("Delete-My-Job-Post-By-Id/{id}")]
         public async Task<IActionResult> DeletejobPost(int id)
         {

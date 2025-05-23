@@ -25,4 +25,10 @@
 		<ProjectReference Include="..\FreelancePlatfrom.Service\FreelancePlatfrom.Service.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Handler\" />
+	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Models\" />
+	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Result\" />
+	</ItemGroup>
+
 </Project>
