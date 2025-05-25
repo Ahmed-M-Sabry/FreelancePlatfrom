@@ -16,5 +16,9 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
         /// <param name="id">The ID of the country.</param>
         /// <returns>The country with the specified ID.</returns>
         Task<Country> GetCountryByIdAsync(string id);
+        Task<Country> GetCountryByNameAsync(string name);
+
+        Task<List<Country>> GetAllCountriesForAdmin();
+        Task<List<Country>> GetAllCountriesForUser();
     }
 }

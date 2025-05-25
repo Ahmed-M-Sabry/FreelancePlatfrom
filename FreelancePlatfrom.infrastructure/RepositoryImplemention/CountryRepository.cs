@@ -19,6 +19,18 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
             _context = context;
         }
 
+        public async Task<List<Country>> GetAllCountriesForAdmin()
+        {
+            return await _context.countries.ToListAsync();
+        }
+
+        public async Task<List<Country>> GetAllCountriesForUser()
+        {
+            return await _context.countries.Where(i => !i.IsDeleted).ToListAsync();
+        }
+
+
+
         /// <summary>
         /// Retrieves a country by its ID.
         /// </summary>
@@ -27,6 +39,11 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         public async Task<Country> GetCountryByIdAsync(string id)
         {
             return await _context.countries.FirstOrDefaultAsync(i=>i.Id == id);
+        }
+
+        public async Task<Country> GetCountryByNameAsync(string name)
+        {
+            return await _context.countries.FirstOrDefaultAsync(i => i.Name.ToLower() == name.ToLower());
         }
     }
 }
