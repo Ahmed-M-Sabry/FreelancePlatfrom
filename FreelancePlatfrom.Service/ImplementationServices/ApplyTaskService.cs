@@ -99,5 +99,10 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         {
             return await _applyTaskRepository.GetPendingApplyTaskForFreelancer(userId);
         }
+
+        public async Task<ApplyTask> GetApplyTaskBetweenClientAndFreelancer(string Clinetid, string FreelacnerId, int id)
+        {
+            return await _applyTaskRepository.GetApplyTaskBetweenClientAndFreelancer(Clinetid, FreelacnerId, id);
+        }
     }
 }

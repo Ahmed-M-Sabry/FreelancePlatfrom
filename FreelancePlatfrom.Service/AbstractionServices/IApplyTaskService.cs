@@ -23,6 +23,7 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<List<ApplyTask>> GetAcceptedApplyTaskForFreelancer(string userId);
         Task<List<ApplyTask>> GetRejectedApplyTaskForFreelancer(string userId);
         Task<List<ApplyTask>> GetPendingApplyTaskForFreelancer(string userId);
+        Task<ApplyTask> GetApplyTaskBetweenClientAndFreelancer(string Clinetid, string FreelacnerId, int id);
 
 
     }

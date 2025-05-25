@@ -55,10 +55,10 @@ namespace FreelancePlatfrom.Data.Entities.JobPostAndContract
             set => _endDate = value >= _startDate ? value : throw new ArgumentException("EndDate must be after StartDate.");
         }
 
-        public bool IsDeleted { get; set; }
+        public string Status { get; set; } // Accepted, Rejected, Pending
 
-        public int JobPostId { get; set; }
-        public JobPost JobPost { get; set; }
+        public int ApplyTaskId { get; set; }
+        public ApplyTask ApplyTask { get; set; }
 
         public string ClientId { get; set; }
         public ApplicationUser Client { get; set; }

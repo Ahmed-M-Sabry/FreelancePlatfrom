@@ -103,5 +103,11 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
                 .Include(a => a.Client)
                 .ToListAsync();
         }
+
+        public async Task<ApplyTask> GetApplyTaskBetweenClientAndFreelancer(string Clinetid, string FreelacnerId, int id)
+        {
+            return await _context.ApplyTasks
+                .FirstOrDefaultAsync(i=>i.FreelancerId == FreelacnerId  && i.Id == id && i.ClientId == Clinetid);
+        }
     }
 }
