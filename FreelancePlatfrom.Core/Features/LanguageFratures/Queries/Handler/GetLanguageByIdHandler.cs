@@ -34,6 +34,22 @@ namespace FreelancePlatfrom.Core.Features.LanguageFratures.Queries.Handler
         }
         public async Task<ApiResponse<GetLanguageByIdResponse>> Handle(GetLanguageByIdQuery request, CancellationToken cancellationToken)
         {
+            //var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("Uid")?.Value;
+            //if (string.IsNullOrEmpty(userId))
+            //    return BadRequest<string>("User ID not found in token.");
+
+            //// Verify user exists
+            //var user = await _userManager.FindByIdAsync(userId);
+            //if (user == null)
+            //    return BadRequest<string>("User not found.");
+
+            //// Is Admin
+            //if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+            //    return BadRequest<string>("You Must Be An Admin");
+
+
+
+
             var Language = await _languagesService.GetLanguageByIdAsync(request.Id);
             if (Language is null)
                 return NotFound<GetLanguageByIdResponse>($"No Language Found With Id : {request.Id}");

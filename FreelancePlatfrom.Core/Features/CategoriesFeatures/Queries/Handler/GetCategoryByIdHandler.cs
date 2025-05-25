@@ -37,6 +37,21 @@ namespace FreelancePlatfrom.Core.Features.CategoriesFeatures.Queries.Handler
         public async Task<ApiResponse<GetCategoryByIdResponse>> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
 
+            //var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("Uid")?.Value;
+            //if (string.IsNullOrEmpty(userId))
+            //    return BadRequest<string>("User ID not found in token.");
+
+            //// Verify user exists
+            //var user = await _userManager.FindByIdAsync(userId);
+            //if (user == null)
+            //    return BadRequest<string>("User not found.");
+
+            //// Is Admin
+            //if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+            //    return BadRequest<string>("You Must Be An Admin");
+
+
+
             var Category = await _categoryService.GetByIdAsync(request.Id);
             if (Category == null)
                 return NotFound<GetCategoryByIdResponse>($"Not Found Category With Id {request.Id}");

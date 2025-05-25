@@ -28,6 +28,8 @@ namespace FreelancePlatfrom.Core.Mapping
             CreateMap<Skill, GetAllSkillsForAdminResponse>();
 
             CreateMap<Skill, GetAllSkillsForUserResponse>();
+            CreateMap<Skill, GetSkillByIdResponse>();
+            CreateMap<Skill, GetSkillByNameResponse>();
 
         }
 

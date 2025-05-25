@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FreelancePlatfrom.Core.Base;
-using FreelancePlatfrom.Core.Features.LanguageFratures.Queries.Models;
-using FreelancePlatfrom.Core.Features.LanguageFratures.Queries.Results;
+using FreelancePlatfrom.Core.Features.SkillsFeatures.Queries.Models;
+using FreelancePlatfrom.Core.Features.SkillsFeatures.Queries.Result;
 using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.Service.AbstractionServices;
 using MediatR;
@@ -13,28 +13,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancePlatfrom.Core.Features.LanguageFratures.Queries.Handler
+namespace FreelancePlatfrom.Core.Features.SkillsFeatures.Queries.Handler
 {
-    public class GetLanguageByNameHandler : ResponseHandler
-        , IRequestHandler<GetLanguageByNameQuery, ApiResponse<GetLanguageByNameResponse>>
+    public class GetSkillByIdHandler : ResponseHandler
+        , IRequestHandler<GetSkillByIdQuery, ApiResponse<GetSkillByIdResponse>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILanguagesService _languagesService;
+        private readonly ISkillService _skillService;
         private readonly IMapper _mapper;
-        public GetLanguageByNameHandler(UserManager<ApplicationUser> userManager
+        public GetSkillByIdHandler(UserManager<ApplicationUser> userManager
             , IHttpContextAccessor httpContextAccessor
-            , ILanguagesService languagesService
+            , ISkillService skillService
             , IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
-            _languagesService = languagesService;
+            _skillService = skillService;
             _mapper = mapper;
         }
-        public async Task<ApiResponse<GetLanguageByNameResponse>> Handle(GetLanguageByNameQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<GetSkillByIdResponse>> Handle(GetSkillByIdQuery request, CancellationToken cancellationToken)
         {
-
             //var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("Uid")?.Value;
             //if (string.IsNullOrEmpty(userId))
             //    return BadRequest<string>("User ID not found in token.");
@@ -50,13 +49,13 @@ namespace FreelancePlatfrom.Core.Features.LanguageFratures.Queries.Handler
 
 
 
-            var Language = await _languagesService.GetLanguageByNameAsync(request.Value);
-            if (Language is null)
-                return NotFound<GetLanguageByNameResponse>($"No Language Found With name : {request.Value}");
+            var Skill = await _skillService.GetByIdAsync(request.Id);
+            if (Skill is null)
+                return NotFound<GetSkillByIdResponse>($"No Skill Found by Id : {request.Id}");
 
-            var existLanguabge = _mapper.Map<GetLanguageByNameResponse>(Language);
+            var exsitSkill = _mapper.Map<GetSkillByIdResponse>(Skill);
 
-            return Success<GetLanguageByNameResponse>(existLanguabge);
+            return Success<GetSkillByIdResponse>(exsitSkill);
         }
     }
 }

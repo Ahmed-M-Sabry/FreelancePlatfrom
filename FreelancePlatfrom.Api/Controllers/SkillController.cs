@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
+using FreelancePlatfrom.Core.Features.CategoriesFeatures.Queries.Models;
 using FreelancePlatfrom.Core.Features.SkillsFeatures.Command.Models;
 using FreelancePlatfrom.Core.Features.SkillsFeatures.Queries.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -47,6 +48,18 @@ namespace FreelancePlatfrom.Api.Controllers
         public async Task<IActionResult> GetAllSkillsForUser()
         {
             var response = await Mediator.Send(new GetAllSkillsForUserQuery());
+            return NewResultStatusCode(response);
+        }
+        [HttpGet("Get-Skill-By-Id")]
+        public async Task<IActionResult> GetSkillById(int id)
+        {
+            var response = await Mediator.Send(new GetSkillByIdQuery(id));
+            return NewResultStatusCode(response);
+        }
+        [HttpGet("Get-Skill-By-Name")]
+        public async Task<IActionResult> GetSkillByName(string Name)
+        {
+            var response = await Mediator.Send(new GetSkillByNameQuery(Name));
             return NewResultStatusCode(response);
         }
     }
