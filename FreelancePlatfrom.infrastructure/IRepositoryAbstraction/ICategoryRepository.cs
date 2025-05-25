@@ -11,6 +11,12 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
     public interface ICategoryRepository : IGenericRepositoryAsync<Category>
     {
         Task<string> GetCategoryNameByIdAsync(int id);
+        Task<Category> GetCategoryByNameAsync(string name);
+        Task<Category> DeleteCategory(int id);
+        Task<Category> RestoreCategory(int id);
+
+        Task<List<Category>> GetAllCategoriesForUserAsync();
+        Task<List<Category>> GetAllCategoriesForAdminAsync();
     }
 
 }

@@ -26,9 +26,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Features\CategoriesFeatures\Command\Validator\" />
 	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Handler\" />
 	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Models\" />
 	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Result\" />
+	  <Folder Include="Features\LanguageFratures\Command\Validator\" />
+	  <Folder Include="Features\SkillsFeatures\Command\Validator\" />
 	</ItemGroup>
 
 </Project>

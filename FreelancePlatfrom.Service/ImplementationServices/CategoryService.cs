@@ -17,14 +17,49 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             _categoryRepository = categoryRepository;
         }
 
+        public Task CreateNewCategory(Category category)
+        {
+            return _categoryRepository.AddAsync(category);
+        }
+
+        public async Task<Category> DeleteCategoryAsync(int id)
+        {
+            return await _categoryRepository.DeleteCategory(id);
+        }
+
+        public async Task<List<Category>> GetAllCategoriesForAdminAsync()
+        {
+            return await _categoryRepository.GetAllCategoriesForAdminAsync();
+        }
+
+        public async Task<List<Category>> GetAllCategoriesForUserAsync()
+        {
+            return await _categoryRepository.GetAllCategoriesForUserAsync();
+        }
+
         public async Task<Category> GetByIdAsync(int id)
         {
             return await _categoryRepository.GetByIdAsync(id);
         }
 
+        public async Task<Category> GetCategoryByNameAsync(string name)
+        {
+            return await _categoryRepository.GetCategoryByNameAsync(name);
+        }
+
         public async Task<string> GetCategoryNameByIdAsync(int id)
         {
             return await _categoryRepository.GetCategoryNameByIdAsync(id);
+        }
+
+        public async Task<Category> RestoreCategory(int id)
+        {
+            return await _categoryRepository.RestoreCategory(id);
+        }
+
+        public Task UpdatedCategory(Category category)
+        {
+            return _categoryRepository.UpdateAsync(category);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.Register.Freela
         private readonly ICountryServices _countryServices;
         private readonly IAuthenticatioService _authenticatioService;
         private readonly IUserSkillesService _userSkillService;
-        private readonly IUserLanguagesService _languageService;
+        private readonly ILanguagesService _languageService;
         private readonly IFileService _fileService;
         private readonly ISkillService _skillService;
 
@@ -32,7 +32,7 @@ namespace FreelancePlatfrom.Core.Features.AuthenticationFeatures.Register.Freela
             ICountryServices countryServices,
             IAuthenticatioService authenticatioService,
             IUserSkillesService UserskillService,
-            IUserLanguagesService languageService,
+            ILanguagesService languageService,
             ISkillService skillService,
             IFileService fileService)
         {
