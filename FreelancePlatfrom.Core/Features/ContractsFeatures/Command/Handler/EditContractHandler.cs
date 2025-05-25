@@ -2,10 +2,7 @@
 using FluentValidation;
 using FreelancePlatfrom.Core.Base;
 using FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Models;
-using FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Validator;
-using FreelancePlatfrom.Core.Features.JobPostFeatures.Command.Models;
 using FreelancePlatfrom.Data.Entities.Identity;
-using FreelancePlatfrom.Data.Entities.JobPostAndContract;
 using FreelancePlatfrom.Data.Shared;
 using FreelancePlatfrom.Service.AbstractionServices;
 using MediatR;
@@ -13,18 +10,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Handler
 {
-    public class CreateContractHandler : ResponseHandler
-        , IRequestHandler<CreateContractCommand, ApiResponse<string>>
+    public class EditContractHandler : ResponseHandler
+        , IRequestHandler<EditContractCommand, ApiResponse<string>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IValidator<CreateContractCommand> _validator;
+        private readonly IValidator<EditContractCommand> _validator;
         private readonly ICategoryService _categoryService;
         private readonly IUserSkillesService _userSkillService;
         private readonly IMapper _mapper;
@@ -33,10 +31,10 @@ namespace FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Handler
         private readonly IContractService _contractService;
         private readonly IApplyTaskService _applyTaskService;
 
-        public CreateContractHandler(
+        public EditContractHandler(
             UserManager<ApplicationUser> userManager,
             IHttpContextAccessor httpContextAccessor,
-            IValidator<CreateContractCommand> validator,
+            IValidator<EditContractCommand> validator,
             ICategoryService categoryService,
             IUserSkillesService userSkillService,
             IjobPostServices jobPostService,
@@ -56,7 +54,8 @@ namespace FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Handler
             _contractService = contractService;
             _applyTaskService = applyTaskService;
         }
-        public async Task<ApiResponse<string>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
+
+        public async Task<ApiResponse<string>> Handle(EditContractCommand request, CancellationToken cancellationToken)
         {
             // Validate the command
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
@@ -71,45 +70,21 @@ namespace FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Handler
             if (string.IsNullOrEmpty(userId))
                 return BadRequest<string>("User ID not found in token.");
 
-            // Verify user exists
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-                return BadRequest<string>("User not found.");
+            var contract = await _contractService.GetContractById(request.Id);
+            if (contract == null)
+                return NotFound<string>("Contract not found");
 
-            // Is Client
-            if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.User))
-                return BadRequest<string>("You Must Be A Client ");
+            if (contract.ClientId != userId)
+                return BadRequest<string>("You are not authorized to edit this contract");
 
-            if (userId == request.FreelancerId)
-                return BadRequest<string>("You cannot create a contract with yourself.");
+            if (contract.Status == ContractStatus.Accepted)
+                return BadRequest<string>("Cannot edit a contract that has already been accepted");
 
-            // Verify freelancer exists
-            var freelancer = await _userManager.FindByIdAsync(request.FreelancerId);
-            if (freelancer == null)
-                return BadRequest<string>("Freelancer not found.");
+            var newContract =  _mapper.Map(request, contract);
 
-            // verify if the freelancer is already in Role
-            if (!await _userManager.IsInRoleAsync(freelancer, ApplicationRoles.Freelancer))
-                return BadRequest<string>("You Can only Make a Contract With a Freelancer");
+            await _contractService.UpdateContract(newContract);
 
-            // ApplyTask is Exist And Completed
-            var applyTask = await _applyTaskService.GetApplyTaskBetweenClientAndFreelancer(userId, request.FreelancerId, request.ApplyTaskId);
-            if (applyTask == null)
-                return NotFound<string>("We Can't Found Any Apply Task With You and Freelancer");
-
-            var existingContract = await _contractService.GetContractByApplyTaskId(request.ApplyTaskId);
-            if (existingContract != null)
-                return BadRequest<string>("Contract already exists for this apply task.");
-
-            if (applyTask.Status != ApplyTaskStatus.Accepted)
-                return BadRequest<string>("You Must Accepted Apply Task Before Make Contract");
-            
-            var contract = _mapper.Map<Contracts>(request);
-            contract.ClientId = userId;
-
-            await _contractService.AddContract(contract);
-
-            return Created<string>("Contract Created , You Can Edit Or Delete It Before Freelancer Accept");
+            return Created<string>("Contract updated successfully", contract.Id.ToString());
         }
     }
 }

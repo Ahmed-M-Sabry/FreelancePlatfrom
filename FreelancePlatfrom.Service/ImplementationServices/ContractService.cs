@@ -20,5 +20,25 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         {
             return _contractRepository.AddAsync(contracts);
         }
+
+        public Task DeleteContract(Contracts contracts)
+        {
+            return _contractRepository.DeleteAsync(contracts);
+        }
+
+        public async Task<Contracts> GetContractByApplyTaskId(int ApplyTaskId)
+        {
+            return await _contractRepository.GetContractByApplyTaskId(ApplyTaskId);
+        }
+
+        public async Task<Contracts> GetContractById(int ContractId)
+        {
+            return await _contractRepository.GetContractById(ContractId);
+        }
+
+        public Task UpdateContract(Contracts contract)
+        {
+            return _contractRepository.UpdateAsync(contract);
+        }
     }
 }

@@ -34,6 +34,8 @@ namespace FreelancePlatfrom.Core
 
             services.AddScoped<IValidator<CreateContractCommand>, CreateContractCommandValidator>();
 
+            services.AddScoped<IValidator<EditContractCommand>, EditContractCommandValidator>();
+
             services.AddHttpContextAccessor();
 
 

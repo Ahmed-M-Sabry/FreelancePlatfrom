@@ -21,6 +21,18 @@ namespace FreelancePlatfrom.Core.Mapping
                 .ForMember(dest => dest.ContractDate, opt => opt.MapFrom(_ => DateTime.UtcNow))
                 .ForMember(dest=>dest.Status , opt => opt.MapFrom(_=>ContractStatus.Pending));
 
+            CreateMap<EditContractCommand, Contracts>()
+                .ForMember(dest => dest.TermsAndConditions, opt => opt.MapFrom(src => src.TermsAndConditions))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
+                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate))
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.FreelancerId, opt => opt.Ignore())
+                .ForMember(dest => dest.ClientId, opt => opt.Ignore())
+                .ForMember(dest => dest.ApplyTaskId, opt => opt.Ignore())
+                .ForMember(dest => dest.ContractDate, opt => opt.Ignore())
+                .ForMember(dest => dest.Status, opt => opt.Ignore());
+
 
         }
     }

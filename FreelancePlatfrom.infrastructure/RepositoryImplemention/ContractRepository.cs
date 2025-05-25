@@ -2,6 +2,7 @@
 using FreelancePlatfrom.infrastructure.BaseRepository;
 using FreelancePlatfrom.infrastructure.Data;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,16 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         public ContractRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<Contracts> GetContractByApplyTaskId(int ApplyTaskId)
+        {
+            return await _context.Contracts.FirstOrDefaultAsync(c => c.ApplyTaskId == ApplyTaskId);
+        }
+
+        public async Task<Contracts> GetContractById(int ContractId)
+        {
+            return await _context.Contracts.FirstOrDefaultAsync(c => c.Id == ContractId);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 {
     public interface IContractRepository : IGenericRepositoryAsync<Contracts>
     {
-
+        Task<Contracts> GetContractByApplyTaskId(int ApplyTaskId);
+        Task<Contracts> GetContractById(int ContractId);
     }
 }
