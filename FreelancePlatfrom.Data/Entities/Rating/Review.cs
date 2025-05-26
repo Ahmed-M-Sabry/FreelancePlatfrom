@@ -52,7 +52,8 @@ namespace FreelancePlatfrom.Data.Entities.Rating
         public string FreelancerId { get; set; }
         public ApplicationUser Freelancer { get; set; }
 
-        public int ApplyTaskId { get; set; }
-        public ApplyTask ApplyTask { get; set; }
+        public int ContractId { get; set; }
+        public Contracts Contract { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Data.Entities.Identity;
+using FreelancePlatfrom.Data.Entities.Rating;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,5 +67,6 @@ namespace FreelancePlatfrom.Data.Entities.JobPostAndContract
         public string FreelancerId { get; set; }
         public ApplicationUser Freelancer { get; set; }
 
+        public Review Review { get; set; }
     }
 }

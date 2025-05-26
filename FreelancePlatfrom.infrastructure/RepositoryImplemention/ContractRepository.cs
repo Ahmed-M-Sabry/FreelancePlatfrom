@@ -28,6 +28,13 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         {
             return await _context.Contracts.FirstOrDefaultAsync(c => c.Id == ContractId);
         }
+
+        public async Task<Contracts> GetContractWithAccpeted(int id, string userId, string FreelancerId)
+        {
+            return await _context.Contracts.
+                FirstOrDefaultAsync(c => c.Id == id && c.ClientId == userId && c.FreelancerId == FreelancerId);
+        }
+
         public async Task<Contracts> GetContractWithIncludes(int id , string userId)
         {
             return await _context.Contracts

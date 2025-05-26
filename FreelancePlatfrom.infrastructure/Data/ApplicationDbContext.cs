@@ -126,6 +126,11 @@ namespace FreelancePlatfrom.infrastructure.Data
                 .WithMany() 
                 .HasForeignKey(r => r.FreelancerId)
                 .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Review>()
+                .HasOne(r => r.Contract)
+                .WithOne(c => c.Review)
+                .HasForeignKey<Review>(r => r.ContractId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #region Reports
             modelBuilder.Entity<Reports>()

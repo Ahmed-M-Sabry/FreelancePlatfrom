@@ -14,6 +14,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
         Task<Contracts> GetContractById(int ContractId);
         Task<Contracts> GetContractWithIncludes(int id , string userId);
         Task<List<Contracts>> GetMyContractsAsync(string userId);
+        Task<Contracts> GetContractWithAccpeted(int id , string userId , string FreelancerId);
 
     }
 }

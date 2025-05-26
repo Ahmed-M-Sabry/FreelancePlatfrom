@@ -36,6 +36,11 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             return await _contractRepository.GetContractById(ContractId);
         }
 
+        public async Task<Contracts> GetContractWithAccpeted(int id, string userId, string FreelancerId)
+        {
+            return await _contractRepository.GetContractWithAccpeted(id, userId, FreelancerId);
+        }
+
         public async Task<Contracts> GetContractWithIncludes(int id, string userId)
         {
             return await _contractRepository.GetContractWithIncludes(id , userId);

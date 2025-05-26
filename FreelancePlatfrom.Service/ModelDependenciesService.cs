@@ -27,6 +27,7 @@ namespace FreelancePlatfrom.Service
             services.AddTransient<IFavoritesFreelancerServices, FavoritesFreelancerServices>();
             services.AddTransient<IFavoriteJobPostService , FavoriteJobPostService>();
             services.AddTransient<IContractService, ContractService>();
+            services.AddTransient<IReviewService, ReviewService>();
             return services;
         }
     }

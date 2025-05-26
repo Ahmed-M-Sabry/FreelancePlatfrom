@@ -8,6 +8,8 @@ using FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Validator;
 using FreelancePlatfrom.Core.Features.jobPostFeatrures.Command.Models;
 using FreelancePlatfrom.Core.Features.jobPostFeatrures.Command.Validator;
 using FreelancePlatfrom.Core.Features.JobPostFeatures.Command.Models;
+using FreelancePlatfrom.Core.Features.ReviewFeatures.Command.Models;
+using FreelancePlatfrom.Core.Features.ReviewFeatures.Command.Validator;
 using FreelancePlatfrom.Data.Entities.Identity;
 using FreelancePlatfrom.infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
@@ -31,11 +33,10 @@ namespace FreelancePlatfrom.Core
             services.AddScoped<IValidator<EditJobPostCommand>, EditJobPostValidator>();
             services.AddScoped<IValidator<CreateApplyTaskCommand>, CreateApplyTaskValidator>();
             services.AddScoped<IValidator<EditApplyTaskCommand>, EditApplyTaskValidator>();
-
             services.AddScoped<IValidator<CreateContractCommand>, CreateContractCommandValidator>();
-
             services.AddScoped<IValidator<EditContractCommand>, EditContractCommandValidator>();
-
+            services.AddScoped<IValidator<CreateReviewCommand>, CreateReviewValidator>();
+            services.AddScoped<IValidator<EditReviewCommand>, EditReviewValidator>();
             services.AddHttpContextAccessor();
 
 
