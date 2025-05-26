@@ -83,7 +83,5 @@ namespace FreelancePlatfrom.Data.Entities.Identity
         public List<FavoritesFreelancer> Favorites { get; set; }
         public List<FavJobPost> FavoritesJobPosts { get; set; }
         public List<RefreshToken>? refreshTokens { get; set; }
-
-
     }
 }

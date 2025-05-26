@@ -16,6 +16,8 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         /// <param name="directory">The directory to upload the file to.</param>
         /// <returns>The path of the uploaded file.</returns>
         Task<string> UploadFileAsync(string location , IFormFile file);
-        
+        Task<string> UploadFileAsync2(IFormFile file);
+
+
     }
 }

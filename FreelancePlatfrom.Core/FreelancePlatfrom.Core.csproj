@@ -31,6 +31,7 @@
 	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Models\" />
 	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Result\" />
 	  <Folder Include="Features\LanguageFratures\Command\Validator\" />
+	  <Folder Include="Features\PortfolioFeatures\Command\Validator\" />
 	  <Folder Include="Features\SkillsFeatures\Command\Validator\" />
 	</ItemGroup>
 
