@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Models;
+using FreelancePlatfrom.Core.Features.ContractsFeatures.Queries.Results;
 using FreelancePlatfrom.Data.Entities.JobPostAndContract;
 using FreelancePlatfrom.Data.Shared;
 using System;
@@ -33,7 +34,21 @@ namespace FreelancePlatfrom.Core.Mapping
                 .ForMember(dest => dest.ContractDate, opt => opt.Ignore())
                 .ForMember(dest => dest.Status, opt => opt.Ignore());
 
+            CreateMap<Contracts, ContractDetailsResponse>()
+                .ForMember(dest => dest.FreelancerId, opt => opt.MapFrom(src=>src.FreelancerId))
+                .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src=>src.ClientId))
+                .ForMember(dest => dest.ClientFullName,opt => opt.MapFrom(src => src.Client.FirstName + " " + src.Client.LastName))
+                .ForMember(dest => dest.FreelancerFullName,opt => opt.MapFrom(src => src.Freelancer.FirstName + " " + src.Freelancer.LastName))
+                .ForMember(dest => dest.JobPostTitle,opt => opt.MapFrom(src => src.ApplyTask.JobPost.Title))
+                .ForMember(dest => dest.JobPostDescription,opt => opt.MapFrom(src => src.ApplyTask.JobPost.Description));
 
+            CreateMap<Contracts, GetMyContractsResponse>()
+                .ForMember(dest => dest.FreelancerId, opt => opt.MapFrom(src => src.FreelancerId))
+                .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.ClientId))
+                .ForMember(dest => dest.ClientFullName, opt => opt.MapFrom(src => src.Client.FirstName + " " + src.Client.LastName))
+                .ForMember(dest => dest.FreelancerFullName, opt => opt.MapFrom(src => src.Freelancer.FirstName + " " + src.Freelancer.LastName))
+                .ForMember(dest => dest.JobPostTitle, opt => opt.MapFrom(src => src.ApplyTask.JobPost.Title))
+                .ForMember(dest => dest.JobPostDescription, opt => opt.MapFrom(src => src.ApplyTask.JobPost.Description));
         }
     }
 }

@@ -14,6 +14,9 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<Contracts> GetContractById(int ContractId);
         Task UpdateContract(Contracts contract);
         Task DeleteContract(Contracts contracts);
+        Task<Contracts> GetContractWithIncludes(int id, string userId);
+        Task<List<Contracts>> GetMyContractsAsync(string userId);
+
 
     }
 }

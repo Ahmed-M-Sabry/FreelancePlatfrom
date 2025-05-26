@@ -36,9 +36,20 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             return await _contractRepository.GetContractById(ContractId);
         }
 
+        public async Task<Contracts> GetContractWithIncludes(int id, string userId)
+        {
+            return await _contractRepository.GetContractWithIncludes(id , userId);
+        }
+
+        public async Task<List<Contracts>> GetMyContractsAsync(string userId)
+        {
+            return await _contractRepository.GetMyContractsAsync(userId);
+        }
+
         public Task UpdateContract(Contracts contract)
         {
             return _contractRepository.UpdateAsync(contract);
         }
+
     }
 }

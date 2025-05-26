@@ -28,5 +28,26 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
         {
             return await _context.Contracts.FirstOrDefaultAsync(c => c.Id == ContractId);
         }
+        public async Task<Contracts> GetContractWithIncludes(int id , string userId)
+        {
+            return await _context.Contracts
+                .Include(c => c.Client)
+                .Include(c => c.Freelancer)
+                .Include(c => c.ApplyTask)
+                    .ThenInclude(a => a.JobPost)
+                .FirstOrDefaultAsync(c => c.Id == id && ( c.ClientId == userId || c.FreelancerId == userId));
+        }
+        public async Task<List<Contracts>> GetMyContractsAsync(string userId)
+        {
+            return await _context.Contracts
+                .Include(c => c.Client)
+                .Include(c => c.Freelancer)
+                .Include(c => c.ApplyTask)
+                    .ThenInclude(a => a.JobPost)
+                .Where(c => c.ClientId == userId || c.FreelancerId == userId)
+                .ToListAsync();
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
 using FreelancePlatfrom.Core.Features.CategoriesFeatures.Command.Models;
 using FreelancePlatfrom.Core.Features.ContractsFeatures.Command.Models;
+using FreelancePlatfrom.Core.Features.ContractsFeatures.Queries.Models;
 using FreelancePlatfrom.Data.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -41,13 +42,25 @@ namespace FreelancePlatfrom.Api.Controllers
             return NewResultStatusCode(response);
         }
         [HttpPut("Reject-Contract/{id}")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
         public async Task<IActionResult> RejectContract([FromRoute] int id)
         {
             var response = await Mediator.Send(new RejectContractCommand(id));
             return NewResultStatusCode(response);
         }
-
-
+        [HttpGet("Contract-Details/{id}")]
+        [Authorize(Roles = ApplicationRoles.Freelancer + "," + ApplicationRoles.User)]
+        public async Task<IActionResult> GetContractDetails([FromRoute] int id)
+        {
+            var response = await Mediator.Send(new GetContractByIdQuery(id));
+            return NewResultStatusCode(response);
+        }
+        [HttpGet("My-Contracts")]
+        public async Task<IActionResult> GetMyContracts()
+        {
+            var response = await Mediator.Send(new GetMyContractsQuery());
+            return NewResultStatusCode(response);
+        }
 
     }
 }
