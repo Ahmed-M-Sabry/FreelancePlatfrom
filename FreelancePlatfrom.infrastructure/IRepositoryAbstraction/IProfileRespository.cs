@@ -10,6 +10,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 {
     public interface IProfileRespository : IGenericRepositoryAsync<Portfolio>
     {
-
+        Task<List<Portfolio>> GetByFreelancerIdAsync(string freelancerId);
+        Task<Portfolio> GetByIdAsync(int id);
     }
 }

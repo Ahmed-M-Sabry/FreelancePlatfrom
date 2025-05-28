@@ -2,6 +2,7 @@
 using FreelancePlatfrom.infrastructure.BaseRepository;
 using FreelancePlatfrom.infrastructure.Data;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,18 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
             _context = context;
         }
         // You can add any specific methods for ProfileRespository here if needed
-
+        public async Task<List<Portfolio>> GetByFreelancerIdAsync(string freelancerId)
+        {
+            return await _context.Portfolio
+                .Include(p => p.ApplicationUser)
+                .Where(p => p.UserId == freelancerId)
+                .ToListAsync();
+        }
+        public async Task<Portfolio> GetByIdAsync(int id)
+        {
+            return await _context.Portfolio
+                .Include(p => p.ApplicationUser)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

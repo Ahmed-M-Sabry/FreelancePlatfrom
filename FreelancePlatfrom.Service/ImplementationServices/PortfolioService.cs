@@ -1,5 +1,6 @@
 ﻿using FreelancePlatfrom.Data.Entities;
 using FreelancePlatfrom.infrastructure.BaseRepository;
+using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
 using FreelancePlatfrom.Service.AbstractionServices;
 using System;
 using System.Collections.Generic;
@@ -11,31 +12,36 @@ namespace FreelancePlatfrom.Service.ImplementationServices
 {
     public class PortfolioService : IPortfolioService
     {
-        private readonly IGenericRepositoryAsync<Portfolio> _repo;
+        private readonly IProfileRespository _profileRespository;
 
-        public PortfolioService(IGenericRepositoryAsync<Portfolio> repo)
+        public PortfolioService(IProfileRespository profileRespository)
         {
-            _repo = repo;
+            _profileRespository = profileRespository;
         }
 
         public async Task AddAsync(Portfolio portfolio)
         {
-            await _repo.AddAsync(portfolio);
+            await _profileRespository.AddAsync(portfolio);
         }
 
         public async Task DeleteAsync(Portfolio portfolio)
         {
-             await _repo.DeleteAsync(portfolio);
+             await _profileRespository.DeleteAsync(portfolio);
+        }
+
+        public async Task<List<Portfolio>> GetByFreelancerIdAsync(string freelancerId)
+        {
+            return await _profileRespository.GetByFreelancerIdAsync(freelancerId);
         }
 
         public async Task<Portfolio?> GetByIdAsync(int id)
         {
-            return await _repo.GetByIdAsync(id);
+            return await _profileRespository.GetByIdAsync(id);
         }
 
         public async Task UpdateAsync(Portfolio portfolio)
         {
-            await _repo.UpdateAsync(portfolio);
+            await _profileRespository.UpdateAsync(portfolio);
         }
 
     }

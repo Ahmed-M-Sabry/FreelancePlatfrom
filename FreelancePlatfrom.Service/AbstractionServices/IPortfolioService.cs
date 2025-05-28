@@ -13,5 +13,6 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task UpdateAsync(Portfolio portfolio);
         Task DeleteAsync(Portfolio portfolio);
         Task<Portfolio?> GetByIdAsync(int id);
+        Task<List<Portfolio>> GetByFreelancerIdAsync(string freelancerId);
     }
 }
