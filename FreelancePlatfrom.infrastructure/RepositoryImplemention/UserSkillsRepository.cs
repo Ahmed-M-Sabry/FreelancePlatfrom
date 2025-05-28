@@ -89,6 +89,19 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
                 })
                 .ToListAsync();
         }
+        public async Task RemoveUserSkillsAsync(string userId, List<int> skillIds)
+        {
+            var skillsToRemove = await _context.UserSkills
+                .Where(us => us.UserId == userId && skillIds.Contains(us.SkillId))
+                .ToListAsync();
+
+            if (skillsToRemove.Any())
+            {
+                _context.UserSkills.RemoveRange(skillsToRemove);
+                await _context.SaveChangesAsync();
+            }
+        }
+
 
     }
 }

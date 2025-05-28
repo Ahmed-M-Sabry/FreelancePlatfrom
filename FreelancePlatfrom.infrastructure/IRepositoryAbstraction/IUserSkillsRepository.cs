@@ -19,6 +19,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
         Task RemoveUserSkillById(string userId, int Skillid);
         Task<List<string>> GetUserSkillNamesAsync(string userId);
         Task<List<Skill>> GetUserSkillsWithNamesAndIdAsync(string userId);
+        Task RemoveUserSkillsAsync(string userId, List<int> skillIds);
 
 
 

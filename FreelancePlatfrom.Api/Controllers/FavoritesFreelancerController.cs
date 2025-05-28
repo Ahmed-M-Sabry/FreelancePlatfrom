@@ -40,7 +40,7 @@ namespace FreelancePlatfrom.Api.Controllers
         public async Task<IActionResult> GetFavorites()
         {
             var result = await Mediator.Send(new GetMyFavoritesFreelancerQuery());
-            return Ok(result);
+            return NewResultStatusCode(result);
         }
     }
 }

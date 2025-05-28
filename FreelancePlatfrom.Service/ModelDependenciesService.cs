@@ -30,6 +30,8 @@ namespace FreelancePlatfrom.Service
             services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IReportService  , ReportService>();
             services.AddTransient<IPortfolioService, PortfolioService>();
+            services.AddTransient<IAccountService, AccountService>();
+
             return services;
         }
     }

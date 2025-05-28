@@ -46,5 +46,11 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
                 .ToListAsync();
         }
 
+        public async Task<double> GetFreelancerRateById(string freelancerId)
+        {
+            return _context.Reviews
+                .Where(r => r.FreelancerId == freelancerId)
+                .AverageAsync(r => r.Rate).Result;
+        }
     }
 }

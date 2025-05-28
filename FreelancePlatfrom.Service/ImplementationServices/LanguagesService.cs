@@ -51,5 +51,14 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         {
             return _languageRepository.UpdateAsync(language);   
         }
+
+        public Task<List<string>> GetUserLanguageIdsAsync(string userId)
+            => _languageRepository.GetUserLanguageIdsAsync(userId);
+
+        public Task AddUserLanguagesAsync(List<ApplicationUserLanguage> userLanguages)
+            => _languageRepository.AddUserLanguagesAsync(userLanguages);
+
+        public Task RemoveUserLanguagesAsync(string userId, List<string> languageIds)
+            => _languageRepository.RemoveUserLanguagesAsync(userId, languageIds);
     }
 }

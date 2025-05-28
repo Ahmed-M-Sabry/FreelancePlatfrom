@@ -1,4 +1,5 @@
-﻿using FreelancePlatfrom.Data.Entities.SkillAndCategory;
+﻿using FreelancePlatfrom.Data.Entities.RegisterNeeded;
+using FreelancePlatfrom.Data.Entities.SkillAndCategory;
 using FreelancePlatfrom.infrastructure.Data;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
 using FreelancePlatfrom.Service.AbstractionServices;
@@ -47,5 +48,18 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         {
             return await _skillRepository.GetUserSkillsWithNamesAndIdAsync(userId);
         }
+
+        public Task AddUserSkillsAsync(List<UserSkill> newUserSkills)
+        {
+            return _skillRepository.AddRangeAsync(newUserSkills);
+        }
+        public async Task RemoveUserSkillsAsync(string userId, List<int> skillIds)
+        {
+            foreach (var skillId in skillIds)
+            {
+                await _skillRepository.RemoveUserSkillById(userId, skillId);
+            }
+        }
+
     }
 }

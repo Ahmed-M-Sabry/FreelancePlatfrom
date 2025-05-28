@@ -15,5 +15,8 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
         Task<Review> GetReviewWithUsersAsync(int reviewId);
         Task<List<Review>> GetAllMyReviewsAsync(string userId);
 
+        // Additional methods can be added here as needed
+        Task<double> GetFreelancerRateById(string freelancerId);
+
     }
 }

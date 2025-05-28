@@ -16,5 +16,9 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task UpdateAsync(Language language);
         Task<List<Language>> GetAllLanguagesAsync();
         Task<List<Language>> GetAllUserLanguagesAsync();
+
+        Task<List<string>> GetUserLanguageIdsAsync(string userId);
+        Task AddUserLanguagesAsync(List<ApplicationUserLanguage> userLanguages);
+        Task RemoveUserLanguagesAsync(string userId, List<string> languageIds);
     }
 }

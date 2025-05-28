@@ -47,6 +47,11 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             return await _reviewRepository.GetByIdAsync(id);
         }
 
+        public async Task<double> GetFreelancerRateById(string freelancerId)
+        {
+            return await _reviewRepository.GetFreelancerRateById(freelancerId);
+        }
+
         public async Task<Review> GetReviewWithUsersAsync(int reviewId)
         {
             return await _reviewRepository.GetReviewWithUsersAsync(reviewId);

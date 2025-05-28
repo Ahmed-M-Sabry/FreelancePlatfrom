@@ -18,6 +18,8 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<Review> GetReviewWithUsersAsync(int reviewId);
         Task<List<Review>> GetAllMyReviewsAsync(string userId);
 
+        Task<double> GetFreelancerRateById(string freelancerId);
+
 
     }
 }

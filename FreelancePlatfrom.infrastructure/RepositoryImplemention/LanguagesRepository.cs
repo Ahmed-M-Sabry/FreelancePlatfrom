@@ -51,6 +51,33 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
 
             return validLanguageNames;
         }
+            public async Task<List<string>> GetUserLanguageIdsAsync(string userId)
+            {
+                return await _context.ApplicationUserLanguages
+                    .Where(ul => ul.ApplicationUserId == userId)
+                    .Select(ul => ul.LanguageId)
+                    .ToListAsync();
+            }
+
+            public async Task AddUserLanguagesAsync(List<ApplicationUserLanguage> userLanguages)
+            {
+                await _context.ApplicationUserLanguages.AddRangeAsync(userLanguages);
+                await _context.SaveChangesAsync();
+            }
+
+            public async Task RemoveUserLanguagesAsync(string userId, List<string> languageIds)
+            {
+                var toRemove = await _context.ApplicationUserLanguages
+                    .Where(ul => ul.ApplicationUserId == userId && languageIds.Contains(ul.LanguageId))
+                    .ToListAsync();
+
+                if (toRemove.Any())
+                {
+                    _context.ApplicationUserLanguages.RemoveRange(toRemove);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using FreelancePlatfrom.Data.Entities.SkillAndCategory;
+﻿using FreelancePlatfrom.Data.Entities.RegisterNeeded;
+using FreelancePlatfrom.Data.Entities.SkillAndCategory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task RemoveUserSkillById(string userId,int Skillid);
         Task<List<string>> GetUserSkillNamesAsync(string userId);
         Task<List<Skill>> GetUserSkillsWithNamesAndIdAsync(string userId);
-
+        Task AddUserSkillsAsync(List<UserSkill> newUserSkills);
+        Task RemoveUserSkillsAsync(string userId, List<int> skillIds);
 
     }
 }
