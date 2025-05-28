@@ -27,9 +27,9 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             throw new NotImplementedException();
         }
 
-        public Task<List<string>> GetAllFreelancersFavoritedByClient(string clientId)
+        public async Task<List<FavoritesFreelancer>> GetAllFreelancersFavoritedByClient(string clientId)
         {
-            throw new NotImplementedException();
+            return await _favoritesFreelancerRepository.GetAllFreelancersFavoritedByClient(clientId);
         }
 
         public async Task<FavoritesFreelancer> GetFavoritesFreelancerById(string freelancerId)

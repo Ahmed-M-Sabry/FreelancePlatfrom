@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Data.Entities.FavoritesTables;
+using FreelancePlatfrom.Data.Entities.JobPostAndContract;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
 using FreelancePlatfrom.Service.AbstractionServices;
 using System;
@@ -22,6 +23,10 @@ namespace FreelancePlatfrom.Service.ImplementationServices
             return _jobPostFavouriteRepository.AddAsync(favJobPost);
         }
 
+        public async Task<List<FavJobPost>> GetFavoriteJobPostsAsync(string freelancerId)
+        {
+            return await _jobPostFavouriteRepository.GetFavoriteJobPostsAsync(freelancerId);
+        }
 
         public async Task<FavJobPost> IsJobPostFavorited(string freelancerId, int jobPostId)
         {

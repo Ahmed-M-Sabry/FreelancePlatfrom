@@ -181,9 +181,11 @@ namespace FreelancePlatfrom.infrastructure.Data
                 .WithMany(u => u.Favorites)
                 .HasForeignKey(f => f.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<FavoritesFreelancer>()
-                .Ignore(f => f.Freelancer);
+                .HasOne(f => f.Freelancer)
+                .WithMany()
+                .HasForeignKey(f => f.FreelancerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<FavJobPost>()
                 .HasOne(f => f.Freelancer)

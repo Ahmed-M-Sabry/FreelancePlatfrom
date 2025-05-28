@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Data.Entities.FavoritesTables;
+using FreelancePlatfrom.Data.Entities.JobPostAndContract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<FavJobPost> IsJobPostFavorited(string freelancerId, int jobPostId);
         Task AddJobPostFavourite(FavJobPost favJobPost);
         Task RemoveJobPostFavourite(FavJobPost favJobPost);
+        Task<List<FavJobPost>> GetFavoriteJobPostsAsync(string freelancerId);
+
     }
 }

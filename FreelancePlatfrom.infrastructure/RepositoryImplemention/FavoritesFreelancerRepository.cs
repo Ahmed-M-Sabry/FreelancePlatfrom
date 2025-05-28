@@ -19,6 +19,14 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
             _context = context;
         }
 
+        public async Task<List<FavoritesFreelancer>> GetAllFreelancersFavoritedByClient(string clientId)
+        {
+            return await _context.favoritesFreelancers
+                .Where(f => f.ClientId == clientId)
+                .Include(f => f.Freelancer) // Assuming you want to include the Freelancer details
+                .ToListAsync();
+        }
+
         public async Task<FavoritesFreelancer> GetFavoritesFreelancerById(string freelancerId)
         {
             return await _context.favoritesFreelancers

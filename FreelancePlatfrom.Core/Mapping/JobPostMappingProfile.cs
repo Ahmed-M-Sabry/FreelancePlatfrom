@@ -10,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FreelancePlatfrom.Core.Features.JopPostFeatrures.Queries.Result;
+using FreelancePlatfrom.Core.Features.JopPostFeatrures.Queries.Models;
+using FreelancePlatfrom.Core.Features.JobPostFavoriteFeatrures.Queries.Result;
+using FreelancePlatfrom.Data.Entities.FavoritesTables;
 
 namespace FreelancePlatfrom.Core.Mapping
 {
@@ -58,6 +61,9 @@ namespace FreelancePlatfrom.Core.Mapping
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ApplicationUser.FirstName+" "+src.ApplicationUser.LastName))
                 .ForMember(dest => dest.SkillNames, opt => opt.MapFrom(src => src.JobPostSkills.Select(s => s.Skill.Name)))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
+
+
+
         }
     }
 }

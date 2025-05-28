@@ -7,8 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Features\FavoritesFreelancerFeatures\Queriess\**" />
 	  <Compile Remove="Features\FavoritesFreelancer\**" />
+	  <EmbeddedResource Remove="Features\FavoritesFreelancerFeatures\Queriess\**" />
 	  <EmbeddedResource Remove="Features\FavoritesFreelancer\**" />
+	  <None Remove="Features\FavoritesFreelancerFeatures\Queriess\**" />
 	  <None Remove="Features\FavoritesFreelancer\**" />
 	</ItemGroup>
 
@@ -27,9 +30,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Features\CategoriesFeatures\Command\Validator\" />
-	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Handler\" />
-	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Models\" />
-	  <Folder Include="Features\JobPostFavoriteFeatrures\Queries\Result\" />
 	  <Folder Include="Features\LanguageFratures\Command\Validator\" />
 	  <Folder Include="Features\PortfolioFeatures\Command\Validator\" />
 	  <Folder Include="Features\SkillsFeatures\Command\Validator\" />

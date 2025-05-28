@@ -23,5 +23,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
         Task<JobPost> GetByIdAndNotDeletedAsync(int id);
         Task<string> DeleteAsync(JobPost jobPost);
 
+        Task<List<JobPost>> GetFavoriteJobPostsAsync(string freelancerId);
+
     }
 }

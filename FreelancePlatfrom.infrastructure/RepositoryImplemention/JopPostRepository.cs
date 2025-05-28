@@ -78,6 +78,14 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
             return await _context.JobPosts
                 .FirstOrDefaultAsync(j => j.Id == id && !j.IsDeleted);
         }
+        public async Task<List<JobPost>> GetFavoriteJobPostsAsync(string freelancerId)
+        {
+            return await _context.FavoriteJobPost
+                .Where(f => f.FreelancerId == freelancerId)
+                .Include(f => f.JobPost)
+                .Select(f => f.JobPost)
+                .ToListAsync();
+        }
     }
 
 }

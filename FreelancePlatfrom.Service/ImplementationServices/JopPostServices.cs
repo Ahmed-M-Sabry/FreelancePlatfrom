@@ -1,5 +1,6 @@
 ﻿using FreelancePlatfrom.Data.Entities.JobPostAndContract;
 using FreelancePlatfrom.infrastructure.IRepositoryAbstraction;
+using FreelancePlatfrom.infrastructure.RepositoryImplemention;
 using FreelancePlatfrom.Service.AbstractionServices;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,10 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         public Task UpdateJobPostAsync(JobPost jobPost)
         {
             return _jobPostRepository.UpdateAsync(jobPost);
+        }
+        public async Task<List<JobPost>> GetFavoriteJobPostsAsync(string freelancerId)
+        {
+            return await _jobPostRepository.GetFavoriteJobPostsAsync(freelancerId);
         }
     }
 }

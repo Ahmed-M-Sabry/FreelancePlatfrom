@@ -12,7 +12,7 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<bool> IsFreelancerFavorited(string clientId, string freelancerId);
         Task<bool> AddFavoriteToFreelancer(FavoritesFreelancer favoritesFreelancer);
         Task RemoveFavoriteFromFreelancer(FavoritesFreelancer favoritesFreelancer);
-        Task<List<string>> GetAllFreelancersFavoritedByClient(string clientId);
+        Task<List<FavoritesFreelancer>> GetAllFreelancersFavoritedByClient(string clientId);
         Task<List<string>> GetAllClientsWhoFavoritedFreelancer(string freelancerId);
         Task<FavoritesFreelancer> GetFavoritesFreelancerById(string freelancerId);
     }

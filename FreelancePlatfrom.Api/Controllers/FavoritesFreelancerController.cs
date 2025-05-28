@@ -1,5 +1,7 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
 using FreelancePlatfrom.Core.Features.FavoritesFreelancerFeatures.Command.Models;
+using FreelancePlatfrom.Core.Features.FavoritesFreelancerFeatures.Queries.Models;
+using FreelancePlatfrom.Core.Features.JobPostFavoriteFeatrures.Queries.Models;
 using FreelancePlatfrom.Data.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +35,12 @@ namespace FreelancePlatfrom.Api.Controllers
             var response = await Mediator.Send(new AddAndRemoveFavoriteFromFreelancerCommand(FreelancerId));
             return NewResultStatusCode(response);
         }
-
+        [Authorize(Roles = ApplicationRoles.User)]
+        [HttpGet("My-Favorites-Freelancer")]
+        public async Task<IActionResult> GetFavorites()
+        {
+            var result = await Mediator.Send(new GetMyFavoritesFreelancerQuery());
+            return Ok(result);
+        }
     }
 }

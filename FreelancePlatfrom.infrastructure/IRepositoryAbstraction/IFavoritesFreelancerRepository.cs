@@ -16,7 +16,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 
         Task<FavoritesFreelancer> GetFavoritesFreelancerById(string freelancerId);
 
-        //Task<List<string>> GetAllFreelancersFavoritedByClient(string clientId);
+        Task<List<FavoritesFreelancer>> GetAllFreelancersFavoritedByClient(string clientId);
         //Task<List<string>> GetAllClientsWhoFavoritedFreelancer(string freelancerId);
     }
 }

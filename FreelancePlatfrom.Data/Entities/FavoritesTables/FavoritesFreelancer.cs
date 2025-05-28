@@ -12,30 +12,15 @@ namespace FreelancePlatfrom.Data.Entities.FavoritesTables
     /// </summary>
     public class FavoritesFreelancer
     {
-        private int _id;
-        private string _clientId;
-        private string _freelancerId;
+        public int Id { get; set; }
 
-        public int Id
-        {
-            get => _id;
-            set => _id = value;
-        }
-
-        public string ClientId
-        {
-            get => _clientId;
-            set => _clientId = value ?? throw new ArgumentNullException(nameof(ClientId));
-        }
+        public string ClientId { get; set; }
 
         public ApplicationUser Client { get; set; }
 
-        public string FreelancerId
-        {
-            get => _freelancerId;
-            set => _freelancerId = value ?? throw new ArgumentNullException(nameof(FreelancerId));
-        }
+        public string FreelancerId { get; set; }
 
         public ApplicationUser Freelancer { get; set; }
     }
+
 }
