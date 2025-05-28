@@ -45,20 +45,14 @@ namespace FreelancePlatfrom.Core.Features.AccountFeatures.Command.Handler
             // Validate provided language IDs
             var validLanguageIds = await _languagesService.GetValidLanguageNamesAsync(request.LanguageIds);
             if (validLanguageIds == null || validLanguageIds.Count != request.LanguageIds.Count)
-                return BadRequest<string>("One or more language IDs are invalid Or Already Exist.");
+                return BadRequest<string>("One or more language IDs are invalid.");
 
             // Get current user language IDs
             var currentLanguageIds = await _languagesService.GetUserLanguageIdsAsync(userId);
 
-            // Determine which languages to add or remove
+            // Add only new languages (skip existing)
             var toAdd = request.LanguageIds.Except(currentLanguageIds).ToList();
-            var toRemove = currentLanguageIds.Except(request.LanguageIds).ToList();
 
-            // Remove old languages
-            if (toRemove.Any())
-                await _languagesService.RemoveUserLanguagesAsync(userId, toRemove);
-
-            // Add new languages
             if (toAdd.Any())
             {
                 var newUserLanguages = toAdd.Select(languageId => new ApplicationUserLanguage
@@ -72,5 +66,6 @@ namespace FreelancePlatfrom.Core.Features.AccountFeatures.Command.Handler
 
             return Success<string>("Freelancer languages updated successfully.");
         }
+
     }
 }
