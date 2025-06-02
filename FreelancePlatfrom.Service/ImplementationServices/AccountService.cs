@@ -32,5 +32,10 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         {
             return _accountRepository.UpdateAsync(user);
         }
+        public async Task<List<ApplicationUser>> SearchFreelancersAsync(string keyword)
+        {
+            return await _accountRepository.SearchFreelancersAsync(keyword);
+        }
+
     }
 }

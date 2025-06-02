@@ -17,6 +17,12 @@ namespace FreelancePlatfrom.Api.Controllers
     [Authorize]
     public class AccountController : ApplicationControllerBase
     {
+        [HttpGet("Search-freelancers")]
+        public async Task<IActionResult> SearchFreelancers([FromQuery] string keyword)
+        {
+            var result = await Mediator.Send(new SearchFreelancersQuery { Keyword = keyword });
+            return Ok(result);
+        }
 
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword([FromForm] ChangePasswordCommand changePasswordCommand)

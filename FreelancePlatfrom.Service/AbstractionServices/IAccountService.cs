@@ -13,5 +13,7 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<ApplicationUser> GetApplicationUserByIdAsync(string userId);
 
         Task UpdateUserAsync(ApplicationUser user);
+        Task<List<ApplicationUser>> SearchFreelancersAsync(string keyword);
+
     }
 }

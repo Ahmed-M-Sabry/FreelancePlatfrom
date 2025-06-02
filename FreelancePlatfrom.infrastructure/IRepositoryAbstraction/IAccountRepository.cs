@@ -12,5 +12,7 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
     {
         Task<ApplicationUser> GetApplicationFreelancerByIdAsync(string userId);
         Task<ApplicationUser> GetApplicationUserByIdAsync(string userId);
+        Task<List<ApplicationUser>> SearchFreelancersAsync(string keyword);
+
     }
 }

@@ -36,5 +36,17 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
                 .Include(u => u.country)
                 .FirstOrDefaultAsync(u => u.Id == userId);
         }
+        public async Task<List<ApplicationUser>> SearchFreelancersAsync(string keyword)
+        {
+            keyword = keyword.ToLower();
+
+            return await _context.Users
+                .Where(u =>
+                           (u.FirstName.ToLower().Contains(keyword) ||
+                            u.LastName.ToLower().Contains(keyword) ||
+                            u.Email.ToLower().Contains(keyword)))
+                .ToListAsync();
+        }
+
     }
 }
