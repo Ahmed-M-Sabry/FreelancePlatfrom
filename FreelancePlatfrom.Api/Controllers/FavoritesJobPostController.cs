@@ -14,20 +14,14 @@ namespace FreelancePlatfrom.Api.Controllers
     [ApiController]
     public class FavoritesJobPostController : ApplicationControllerBase
     {
-        [HttpPost("Add-Favourite-JobPost")]
-        [Authorize(Roles =ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> AddFavoriteToJobPost([FromForm] int jobPostId)
+        [HttpGet("My-Favorites-JobPost")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
+        public async Task<IActionResult> GetFavorites()
         {
-            var response = await Mediator.Send(new AddJopbPostFavouriteCommand(jobPostId));
-            return NewResultStatusCode(response);
+            var result = await Mediator.Send(new GetFavJobPostsQuery());
+            return NewResultStatusCode(result);
         }
-        [HttpDelete("Delete-Favourite-JobPost")]
-        [Authorize(Roles =ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> RemoveFavouriteFromJobPost([FromForm] int jobPostId)
-        {
-            var response = await Mediator.Send(new RemoveJopbPostFavouriteCommand(jobPostId));
-            return NewResultStatusCode(response);
-        }
+
         [HttpPost("Add-Delete-Favourite-JobPost")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
         public async Task<IActionResult> AddandRemoveFavouriteFromJobPost([FromForm] int jobPostId)
@@ -36,13 +30,20 @@ namespace FreelancePlatfrom.Api.Controllers
             return NewResultStatusCode(response);
         }
 
+        [HttpPost("Add-Favourite-JobPost")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
-        [HttpGet("My-Favorites-JobPost")]
-        public async Task<IActionResult> GetFavorites()
+        public async Task<IActionResult> AddFavoriteToJobPost([FromForm] int jobPostId)
         {
-            var result = await Mediator.Send(new GetFavJobPostsQuery());
-            return NewResultStatusCode(result);
+            var response = await Mediator.Send(new AddJopbPostFavouriteCommand(jobPostId));
+            return NewResultStatusCode(response);
         }
 
+        [HttpDelete("Delete-Favourite-JobPost")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
+        public async Task<IActionResult> RemoveFavouriteFromJobPost([FromForm] int jobPostId)
+        {
+            var response = await Mediator.Send(new RemoveJopbPostFavouriteCommand(jobPostId));
+            return NewResultStatusCode(response);
+        }
     }
 }

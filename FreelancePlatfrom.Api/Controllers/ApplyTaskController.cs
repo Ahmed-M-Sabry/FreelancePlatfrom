@@ -14,76 +14,91 @@ namespace FreelancePlatfrom.Api.Controllers
     [Authorize]
     public class ApplyTaskController : ApplicationControllerBase
     {
-        [HttpGet("Get-My-All-ApplyTask-Freelancer")]
-        [Authorize(Roles =ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> GetMyAllApplyTaskFreelancer()
+        // GET Methods - Freelancer
+        [HttpGet("GetAllApplyTasksFreelancer")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
+        public async Task<IActionResult> GetAllApplyTasksFreelancer()
         {
             var result = await Mediator.Send(new GetFreelancerApplyTaskQuery());
             return NewResultStatusCode(result);
         }
-        [HttpGet("Get-My-All-ApplyTask-Client")]
-        [Authorize(Roles = ApplicationRoles.User)]
-        public async Task<IActionResult> GetMyAllApplyTaskClient()
-        {
-            var result = await Mediator.Send(new GetClientApplyTaskQurey());
-            return NewResultStatusCode(result);
-        }
-        [HttpGet("Get-ApplyTask-By-JobPost-Id")]
-        public async Task<IActionResult> GetMyAllApplyTaskByJobPostID(int id)
-        {
-            var result = await Mediator.Send(new GetApplyTaskByJobPostIdQuery(id));
-            return NewResultStatusCode(result);
-        }
-        [HttpGet("Get-ApplyTask-By-Id")]
-        public async Task<IActionResult> GetMyAllApplyTaskID(int id)
-        {
-            var result = await Mediator.Send(new GetApplyTaskByIdQuery(id));
-            return NewResultStatusCode(result);
-        }
-        [HttpGet("Get-Accepted-My-ApplyTask")]
+
+        [HttpGet("GetAcceptedApplyTasksFreelancer")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> GetAcceptedMyApplyTask()
+        public async Task<IActionResult> GetAcceptedApplyTasksFreelancer()
         {
             var result = await Mediator.Send(new GetAcceptedMyApplyTaskQuery());
             return NewResultStatusCode(result);
         }
-        [HttpGet("Get-Rejected-My-ApplyTask")]
+
+        [HttpGet("GetRejectedApplyTasksFreelancer")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> GetRejectedMyApplyTask()
+        public async Task<IActionResult> GetRejectedApplyTasksFreelancer()
         {
             var result = await Mediator.Send(new GetRejectedMyApplyTaskQuery());
             return NewResultStatusCode(result);
         }
-        [HttpGet("Get-Pending-My-ApplyTask")]
+
+        [HttpGet("GetPendingApplyTasksFreelancer")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> GetPendingMyApplyTask()
+        public async Task<IActionResult> GetPendingApplyTasksFreelancer()
         {
             var result = await Mediator.Send(new GetPendingMyApplyTaskQuery());
             return NewResultStatusCode(result);
         }
-        [HttpPost("Apply-In-New-JobPost")]
+
+        // GET Methods - Client
+        [HttpGet("GetAllApplyTasksClient")]
+        [Authorize(Roles = ApplicationRoles.User)]
+        public async Task<IActionResult> GetAllApplyTasksClient()
+        {
+            var result = await Mediator.Send(new GetClientApplyTaskQurey());
+            return NewResultStatusCode(result);
+        }
+
+        // GET Methods - General
+        [HttpGet("GetApplyTaskByJobPostId")]
+        public async Task<IActionResult> GetApplyTaskByJobPostId(int id)
+        {
+            var result = await Mediator.Send(new GetApplyTaskByJobPostIdQuery(id));
+            return NewResultStatusCode(result);
+        }
+
+        [HttpGet("GetApplyTaskById")]
+        public async Task<IActionResult> GetApplyTaskById(int id)
+        {
+            var result = await Mediator.Send(new GetApplyTaskByIdQuery(id));
+            return NewResultStatusCode(result);
+        }
+
+        // POST Methods
+        [HttpPost("ApplyForJobPost")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> ApplyInNewJobPost([FromForm] CreateApplyTaskDto createApplyTaskDto)
+        public async Task<IActionResult> ApplyForJobPost([FromForm] CreateApplyTaskDto createApplyTaskDto)
         {
             var command = CreateApplyTaskCommand.FromDto(createApplyTaskDto);
             var result = await Mediator.Send(command);
             return NewResultStatusCode(result);
         }
-        [HttpPut("Accept-ApplyTask")]
+
+        // PUT Methods
+        [HttpPut("AcceptApplyTask")]
         [Authorize(Roles = ApplicationRoles.User)]
         public async Task<IActionResult> AcceptApplyTask([FromForm] int id)
         {
             var result = await Mediator.Send(new AcceptApplyTaskCommand(id));
             return NewResultStatusCode(result);
         }
-        [HttpPut("Reject-ApplyTask")]
+
+        [HttpPut("RejectApplyTask")]
         [Authorize(Roles = ApplicationRoles.User)]
         public async Task<IActionResult> RejectApplyTask([FromForm] int id)
         {
             var result = await Mediator.Send(new RejectApplyTaskCommand(id));
             return NewResultStatusCode(result);
         }
-        [HttpPut("Update-ApplyTask")]
+
+        [HttpPut("UpdateApplyTask")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
         public async Task<IActionResult> UpdateApplyTask([FromForm] EditApplyTaskDto editApplyTaskDto)
         {
@@ -92,13 +107,13 @@ namespace FreelancePlatfrom.Api.Controllers
             return NewResultStatusCode(result);
         }
 
-        [HttpDelete("Delete-ApplyTask-By-Id")]
+        // DELETE Methods
+        [HttpDelete("DeleteApplyTaskById")]
         [Authorize(Roles = ApplicationRoles.Freelancer)]
-        public async Task<IActionResult> DeleteApplyTask([FromForm] int id)
+        public async Task<IActionResult> DeleteApplyTaskById([FromForm] int id)
         {
             var result = await Mediator.Send(new DeleteApplyTaskCommand(id));
             return NewResultStatusCode(result);
         }
-
     }
 }

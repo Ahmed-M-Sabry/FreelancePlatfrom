@@ -13,21 +13,14 @@ namespace FreelancePlatfrom.Api.Controllers
     [ApiController]
     public class FavoritesFreelancerController : ApplicationControllerBase
     {
-
-        [HttpPost("Add-Favorite-Freelancer")]
-        [Authorize(Roles =ApplicationRoles.User)]
-        public async Task<IActionResult> AddFavoriteToFreelancer([FromForm] string FreelancerId)
-        {
-            var response = await Mediator.Send(new AddFavoriteToFreelancerCommand (FreelancerId));
-            return NewResultStatusCode(response);
-        }
-        [HttpDelete("Remove-Favorite-Freelancer")]
+        [HttpGet("My-Favorites-Freelancer")]
         [Authorize(Roles = ApplicationRoles.User)]
-        public async Task<IActionResult> RemoveFavoriteToFreelancer([FromForm] string FreelancerId)
+        public async Task<IActionResult> GetFavorites()
         {
-            var response = await Mediator.Send(new RemoveFavoriteFromFreelancerCommand(FreelancerId));
-            return NewResultStatusCode(response);
+            var result = await Mediator.Send(new GetMyFavoritesFreelancerQuery());
+            return NewResultStatusCode(result);
         }
+
         [HttpPost("Add-And-Remove-Favorite-Freelancer")]
         [Authorize(Roles = ApplicationRoles.User)]
         public async Task<IActionResult> AddAndRemoveFavoriteToFreelancer([FromForm] string FreelancerId)
@@ -35,12 +28,21 @@ namespace FreelancePlatfrom.Api.Controllers
             var response = await Mediator.Send(new AddAndRemoveFavoriteFromFreelancerCommand(FreelancerId));
             return NewResultStatusCode(response);
         }
+
+        [HttpPost("Add-Favorite-Freelancer")]
         [Authorize(Roles = ApplicationRoles.User)]
-        [HttpGet("My-Favorites-Freelancer")]
-        public async Task<IActionResult> GetFavorites()
+        public async Task<IActionResult> AddFavoriteToFreelancer([FromForm] string FreelancerId)
         {
-            var result = await Mediator.Send(new GetMyFavoritesFreelancerQuery());
-            return NewResultStatusCode(result);
+            var response = await Mediator.Send(new AddFavoriteToFreelancerCommand(FreelancerId));
+            return NewResultStatusCode(response);
+        }
+
+        [HttpDelete("Remove-Favorite-Freelancer")]
+        [Authorize(Roles = ApplicationRoles.User)]
+        public async Task<IActionResult> RemoveFavoriteToFreelancer([FromForm] string FreelancerId)
+        {
+            var response = await Mediator.Send(new RemoveFavoriteFromFreelancerCommand(FreelancerId));
+            return NewResultStatusCode(response);
         }
     }
 }

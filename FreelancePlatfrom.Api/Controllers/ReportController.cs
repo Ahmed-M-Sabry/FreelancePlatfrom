@@ -12,6 +12,29 @@ namespace FreelancePlatfrom.Api.Controllers
     [Authorize(Roles = ApplicationRoles.User + "," + ApplicationRoles.Freelancer)]
     public class ReportController : ApplicationControllerBase
     {
+        [HttpGet("Get-All-My-Reports")]
+        public async Task<IActionResult> GetAllMyReports()
+        {
+            var response = await Mediator.Send(new GetAllMyReportsQuery());
+            return NewResultStatusCode(response);
+        }
+
+        [HttpGet("Get-All-Reports-For-Admin")]
+        // [Authorize(Roles = ApplicationRoles.Admin)]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllReportsForAdmin()
+        {
+            var response = await Mediator.Send(new GetAllReportsForAdminQuery());
+            return NewResultStatusCode(response);
+        }
+
+        [HttpGet("Get-Report-By-Id/{id}")]
+        public async Task<IActionResult> GetReportById([FromRoute] int id)
+        {
+            var response = await Mediator.Send(new GetReportByIdQuery(id));
+            return NewResultStatusCode(response);
+        }
+
         [HttpPost("Create-Report")]
         public async Task<IActionResult> CreateReport([FromForm] CreateReportCommand command)
         {
@@ -30,28 +53,6 @@ namespace FreelancePlatfrom.Api.Controllers
         public async Task<IActionResult> DeleteReport([FromForm] int id)
         {
             var response = await Mediator.Send(new DeleteReportCommand(id));
-            return NewResultStatusCode(response);
-        }
-
-        [HttpGet("Get-Report-By-Id/{id}")]
-        public async Task<IActionResult> GetReportById([FromRoute] int id)
-        {
-            var response = await Mediator.Send(new GetReportByIdQuery(id));
-            return NewResultStatusCode(response);
-        }
-
-        [HttpGet("Get-All-My-Reports")]
-        public async Task<IActionResult> GetAllMyReports()
-        {
-            var response = await Mediator.Send(new GetAllMyReportsQuery());
-            return NewResultStatusCode(response);
-        }
-        [HttpGet("Get-All-Reports-For-Admin")]
-        //[Authorize(Roles = ApplicationRoles.Admin)]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAllReportsForAdmin()
-        {
-            var response = await Mediator.Send(new GetAllReportsForAdminQuery());
             return NewResultStatusCode(response);
         }
     }

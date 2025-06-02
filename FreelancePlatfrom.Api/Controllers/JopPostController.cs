@@ -16,29 +16,14 @@ namespace FreelancePlatfrom.Api.Controllers
     [ApiController]
     public class jobPostController : ApplicationControllerBase
     {
-        [Authorize(Roles = ApplicationRoles.Freelancer)]
-        [HttpGet("Search-JobPost")]
-        public async Task<IActionResult> SearchJobPosts([FromQuery] string keyword)
-        {
-            var result = await Mediator.Send(new SearchJobPostsQuery { Keyword = keyword });
-            return NewResultStatusCode(result);
-        }
-
-
-        [AllowAnonymous]
         [HttpGet("Get-All-Job-Posts")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllJobPosts()
         {
             var result = await Mediator.Send(new GetAllJobPostQuery());
             return NewResultStatusCode(result);
         }
-        [HttpGet("Get-My-Job-Posts")]
-        [Authorize(Roles = ApplicationRoles.User)]
-        public async Task<IActionResult> GetMyJobPosts()
-        {
-            var result = await Mediator.Send(new GetMyJobPostQuery());
-            return NewResultStatusCode(result);
-        }
+
         [HttpGet("Get-Job-Post-By-Id/{id}")]
         [Authorize]
         public async Task<IActionResult> GetjobPostById(int id)
@@ -46,6 +31,23 @@ namespace FreelancePlatfrom.Api.Controllers
             var result = await Mediator.Send(new GetJobPostByIdQuery(id));
             return NewResultStatusCode(result);
         }
+
+        [HttpGet("Get-My-Job-Posts")]
+        [Authorize(Roles = ApplicationRoles.User)]
+        public async Task<IActionResult> GetMyJobPosts()
+        {
+            var result = await Mediator.Send(new GetMyJobPostQuery());
+            return NewResultStatusCode(result);
+        }
+
+        [HttpGet("Search-JobPost")]
+        [Authorize(Roles = ApplicationRoles.Freelancer)]
+        public async Task<IActionResult> SearchJobPosts([FromQuery] string keyword)
+        {
+            var result = await Mediator.Send(new SearchJobPostsQuery { Keyword = keyword });
+            return NewResultStatusCode(result);
+        }
+
         [HttpPost("Create-Job-Post")]
         [Authorize(Roles = ApplicationRoles.User)]
         public async Task<IActionResult> CreateJobPost([FromForm] CreateJobPostDto dto)
@@ -54,6 +56,7 @@ namespace FreelancePlatfrom.Api.Controllers
             var result = await Mediator.Send(command);
             return NewResultStatusCode(result);
         }
+
         [HttpPut("Update-Job-Post")]
         [Authorize(Roles = ApplicationRoles.User)]
         public async Task<IActionResult> UpdateJobPost([FromForm] EditJobPostDto dto)
@@ -61,13 +64,13 @@ namespace FreelancePlatfrom.Api.Controllers
             var command = EditJobPostCommand.FromDto(dto);
             var result = await Mediator.Send(command);
             return NewResultStatusCode(result);
-
         }
+
         [HttpDelete("Delete-My-Job-Post-By-Id/{id}")]
         [Authorize(Roles = ApplicationRoles.User)]
         public async Task<IActionResult> DeletejobPost(int id)
         {
-            var result = await Mediator.Send(new DeletejobPostCommand (id));
+            var result = await Mediator.Send(new DeletejobPostCommand(id));
             return NewResultStatusCode(result);
         }
     }
