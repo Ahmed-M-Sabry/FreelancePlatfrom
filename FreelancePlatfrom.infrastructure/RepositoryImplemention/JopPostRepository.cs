@@ -86,6 +86,17 @@ namespace FreelancePlatfrom.infrastructure.RepositoryImplemention
                 .Select(f => f.JobPost)
                 .ToListAsync();
         }
+        public async Task<List<JobPost>> SearchJobPostsAsync(string keyword)
+        {
+            keyword = keyword?.Trim().ToLower();
+
+            return await _context.JobPosts
+                .Where(j => !j.IsDeleted &&
+                            (EF.Functions.Like(j.Title.ToLower(), $"%{keyword}%") ||
+                             EF.Functions.Like(j.Description.ToLower(), $"%{keyword}%")))
+                .ToListAsync();
+        }
+
     }
 
 }

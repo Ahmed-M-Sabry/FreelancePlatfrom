@@ -22,6 +22,7 @@ namespace FreelancePlatfrom.Service.AbstractionServices
         Task<string> DeleteAsync(JobPost jobPost);
 
         Task<List<JobPost>> GetFavoriteJobPostsAsync(string freelancerId);
+        Task<List<JobPost>> SearchJobPostsAsync(string keyword);
 
     }
 }

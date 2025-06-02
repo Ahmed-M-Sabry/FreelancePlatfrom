@@ -1,4 +1,5 @@
 ﻿using FreelancePlatfrom.Api.ApplicationBase;
+using FreelancePlatfrom.Core.Features.AuthenticationFeatures.ChangePasswordFreature.Command.Model;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.LogoutFeature.Command.Model;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.RefreshTokenFeature.Commnand.Models;
 using FreelancePlatfrom.Core.Features.AuthenticationFeatures.Register.ClientRegister.Commands.Model;
@@ -63,6 +64,21 @@ namespace FreelancePlatfrom.Api.Controllers
                 Response.Cookies.Delete("RefreshToken");
                 Response.Cookies.Append("RefreshToken", result.Data.RefreshToken, result.Data.CookieOptions);
             }
+            return NewResultStatusCode(result);
+        }
+        [HttpPost("Generate-reset-token")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GenerateResetToken([FromForm] GenerateResetTokenCommand command)
+        {
+            var result = await Mediator.Send(command);
+            return NewResultStatusCode(result);
+        }
+
+        [HttpPut("Reset-password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordCommand command)
+        {
+            var result = await Mediator.Send(command);
             return NewResultStatusCode(result);
         }
 

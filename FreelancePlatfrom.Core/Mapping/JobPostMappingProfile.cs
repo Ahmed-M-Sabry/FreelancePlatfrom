@@ -62,6 +62,8 @@ namespace FreelancePlatfrom.Core.Mapping
                 .ForMember(dest => dest.SkillNames, opt => opt.MapFrom(src => src.JobPostSkills.Select(s => s.Skill.Name)))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
 
+            CreateMap<JobPost, SearchJobPostsDto>();
+
 
 
         }

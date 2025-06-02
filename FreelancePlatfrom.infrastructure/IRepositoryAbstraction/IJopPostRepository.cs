@@ -25,5 +25,8 @@ namespace FreelancePlatfrom.infrastructure.IRepositoryAbstraction
 
         Task<List<JobPost>> GetFavoriteJobPostsAsync(string freelancerId);
 
+        Task<List<JobPost>> SearchJobPostsAsync(string keyword);
+
+
     }
 }

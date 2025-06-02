@@ -17,6 +17,11 @@ namespace FreelancePlatfrom.Service.ImplementationServices
         {
             _jobPostRepository = jobPostRepository;
         }
+        public async Task<List<JobPost>> SearchJobPostsAsync(string keyword)
+        {
+            return await _jobPostRepository.SearchJobPostsAsync(keyword);
+        }
+
 
         public Task AddJobPost(JobPost jobPost)
         {
