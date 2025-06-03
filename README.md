@@ -2,7 +2,7 @@
 
 Freelance platforms enable remote service offerings and have grown with the rise of remote work. They enhance flexibility, communication, and work-life balance. Machine learning is increasingly used to manage projects and match freelancers to jobs, boosting success in the evolving digital marketplace.
 
-# Freelance Platform API 🧑‍💻
+# Freelance Platform API 
 
 This is a backend Web API for a **Freelance Platform** built using modern and scalable architecture with **ASP.NET Core 8**.  
 It supports users (clients and freelancers) to register, post jobs, apply, manage contracts, and more.
@@ -51,10 +51,10 @@ The project follows the **Clean Architecture** pattern with clear separation of 
 ### 📑 Contracts & Reviews
 - Create and manage contracts between client & freelancer
 - Submit reviews and ratings
+- Add/remove/edit portfolio items
 
 ### 🧠 Admin-Like Management
 - Manage skills, categories, languages, countries
-- Add/remove/edit portfolio items
 - Handle user reports
 
 ---
